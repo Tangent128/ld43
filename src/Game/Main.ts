@@ -7,7 +7,7 @@ import { DumbMotion } from "Ecs/Location";
 import { RunRenderBounds } from "Ecs/RenderBounds";
 import { CheckHp } from "Game/Death";
 import { Data, World } from "Game/GameComponents";
-import { SpawnPlayer, ControlPlayer } from "Game/Player";
+import { SpawnPlayer, ControlPlayer, PlayerCollide } from "Game/Player";
 import { ReapBullets, BulletCollide } from "Game/Weapons";
 import { SpawnStalacfite, StalacfiteThink } from "Game/Enemy/Stalacfite";
 
@@ -37,6 +37,7 @@ export class Shooter {
             // PHASE: React
             FindCollisions(this.data, 50, (className, source, target) => {
                 BulletCollide(this.data, className, source, target);
+                PlayerCollide(this.data, className, source, target);
             });
 
             // PHASE: reaping

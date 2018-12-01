@@ -15,6 +15,7 @@ export class Stalacfite {
 export function SpawnStalacfite(data: Data, world: World, x: number): Id {
     return Create(data, {
         stalacfite: new Stalacfite(),
+        collisionSourceClass: new CollisionClass("enemy"),
         collisionTargetClass: new CollisionClass("enemy"),
         hp: new Hp(Teams.ENEMY, 300),
         location: new Location({

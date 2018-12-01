@@ -1,11 +1,13 @@
-import { Id, Create, Join } from "Ecs/Data";
-import { Polygon, Location, RenderBounds } from "Ecs/Components";
-import { Data, World, PlayerShip } from "Game/GameComponents";
+import { Id, Create, Join, Lookup } from "Ecs/Data";
+import { Polygon, Location, RenderBounds, CollisionClass } from "Ecs/Components";
+import { Data, World, PlayerShip, Hp, Teams } from "Game/GameComponents";
 import { SpawnBullet } from "Game/Weapons";
 
 export function SpawnPlayer(data: Data, world: World): Id {
     return Create(data, {
         playerShip: new PlayerShip(),
+        collisionTargetClass: new CollisionClass("player"),
+        hp: new Hp(Teams.PLAYER, 1),
         location: new Location({
             X: world.width / 2,
             Y: world.height + 15,
@@ -63,4 +65,14 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
 function FireForwardGun(data: Data, world: World, ship: PlayerShip, x: number, y: number) {
     ship.firingCooldown = 0.2;
     SpawnBullet(data, world, x, y);
+}
+
+export function PlayerCollide(data: Data, className: string, sourceId: Id, targetId: Id) {
+    switch(className) {
+        case "enemy>player":
+            const [ship, hp] = Lookup(data, targetId, "playerShip", "hp");
+            if(ship && hp) {
+                hp.hp = 0;
+            }
+    }
 }
