@@ -1,7 +1,7 @@
 import { Layer, DrawSet } from "Applet/Render";
 import { Store } from "Ecs/Data";
 import { Data as EcsData } from "Ecs/Components";
-import { PlayerControl } from "./Input";
+import { PlayerControl } from "Game/Input";
 
 export class World {
     width = 500;
@@ -38,8 +38,8 @@ export class World {
 }
 
 export class Data extends EcsData {
-    playerShip: Store<PlayerShip> = {};
     bullet: Store<Bullet> = {};
+    playerShip: Store<PlayerShip> = {};
 }
 
 export class PlayerShip {
