@@ -25,7 +25,7 @@ export class Shooter {
         interval => {
 
             // PHASE: Input
-            ControlPlayer(this.data, this.world);
+            ControlPlayer(this.data, this.world, interval);
 
             // PHASE: Update
             DumbMotion(this.data, interval);

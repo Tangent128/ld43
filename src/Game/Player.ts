@@ -21,11 +21,12 @@ export function SpawnPlayer(data: Data, world: World): Id {
     });
 }
 
-export function ControlPlayer(data: Data, world: World) {
+export function ControlPlayer(data: Data, world: World, interval: number) {
     const {dx, dy, firing, weaponCycle} = world.playerInput;
     const diagonalSlowdown = (dx != 0 && dy != 0) ? 0.7 : 1;
 
     Join(data, "playerShip", "location").forEach(([id, ship, location]) => {
+        // PHASE: Movement
         const overLeftEdge = location.X < 15;
         const overRightEdge = location.X > (world.width - 15);
         if((overLeftEdge && dx < 0) || (overRightEdge && dx > 0)) {
@@ -45,10 +46,19 @@ export function ControlPlayer(data: Data, world: World) {
             location.VY = dy * 200 * diagonalSlowdown;
         }
 
-        world.debug["Player VY"] = {overBottomEdge, overLeftEdge, overRightEdge, overTopEdge};
+        // PHASE: Firing
+        if(firing && ship.firingCooldown <= 0) {
+            FireForwardGun(data, ship, location.X, location.Y);
+        } else {
+            ship.firingCooldown = Math.max(0, ship.firingCooldown - interval);
+        }
+        world.debug["weapon"] = {firing, cooldown: Math.floor(ship.firingCooldown*1000)};
     });
 
     // edge-triggered
     world.playerInput.weaponCycle = false;
-    world.debug["ControlPlayer"] = [dx, dy, firing, weaponCycle];
+}
+
+function FireForwardGun(data: Data, ship: PlayerShip, x: number, y: number) {
+    ship.firingCooldown = 0.3;
 }

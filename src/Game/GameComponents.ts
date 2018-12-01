@@ -42,4 +42,5 @@ export class Data extends EcsData {
 }
 
 export class PlayerShip {
+    firingCooldown = 0;
 }
