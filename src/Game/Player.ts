@@ -1,9 +1,10 @@
-import { Id, Create } from "Ecs/Data";
+import { Id, Create, Join } from "Ecs/Data";
 import { Polygon, Location, RenderBounds } from "Ecs/Components";
-import { Data, World } from "Game/GameComponents";
+import { Data, World, PlayerShip } from "Game/GameComponents";
 
 export function SpawnPlayer(data: Data, world: World): Id {
     return Create(data, {
+        playerShip: new PlayerShip(),
         location: new Location({
             X: world.width / 2,
             Y: world.height - 15
@@ -20,5 +21,10 @@ export function SpawnPlayer(data: Data, world: World): Id {
 }
 
 export function ControlPlayer(data: Data, world: World) {
+    const {dx, dy} = world.playerInput;
+    Join(data, "playerShip", "location").forEach(([id, ship, location]) => {
+        location.VX = dx * 300;
+        location.VY = dy * 200;
+    });
     world.debug["ControlPlayer"] = [dx, dy];
 }

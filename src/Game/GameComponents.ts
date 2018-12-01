@@ -38,4 +38,8 @@ export class World {
 }
 
 export class Data extends EcsData {
+    playerShip: Store<PlayerShip> = {};
+}
+
+export class PlayerShip {
 }
