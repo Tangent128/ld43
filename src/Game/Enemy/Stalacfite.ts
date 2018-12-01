@@ -1,6 +1,6 @@
 import { Id, Create, Join, Remove } from "Ecs/Data";
-import { Polygon, Location, RenderBounds } from "Ecs/Components";
-import { Data, World, Bullet, Teams } from "Game/GameComponents";
+import { CollisionClass, Polygon, Location, RenderBounds } from "Ecs/Components";
+import { Data, World, Hp, Teams } from "Game/GameComponents";
 
 enum Thought {
     SPAWNING,
@@ -15,6 +15,8 @@ export class Stalacfite {
 export function SpawnStalacfite(data: Data, world: World, x: number): Id {
     return Create(data, {
         stalacfite: new Stalacfite(),
+        collisionTargetClass: new CollisionClass("enemy"),
+        hp: new Hp(Teams.ENEMY, 300),
         location: new Location({
             X: x,
             Y: -50,

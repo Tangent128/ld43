@@ -40,6 +40,7 @@ export class World {
 
 export class Data extends EcsData {
     bullet: Store<Bullet> = {};
+    hp: Store<Hp> = {};
     playerShip: Store<PlayerShip> = {};
     stalacfite: Store<Stalacfite> = {};
 }
@@ -53,7 +54,15 @@ export enum Teams {
     ENEMY
 }
 export class Bullet {
+    hit = false;
     constructor(
-        public team: Teams
+        public team: Teams,
+        public attack = 100
+    ) {};
+}
+export class Hp {
+    constructor(
+        public team: Teams,
+        public hp: number
     ) {};
 }

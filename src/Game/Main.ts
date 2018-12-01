@@ -1,13 +1,13 @@
 import { Game } from "Applet/Init";
-import { KeyControl, KeyHandler } from "Applet/Keyboard";
+import { KeyControl } from "Applet/Keyboard";
 import { Loop } from "Applet/Loop";
-import { DrawSet, Layer } from "Applet/Render";
+import { DrawSet } from "Applet/Render";
 import { FindCollisions } from "Ecs/Collision";
 import { DumbMotion } from "Ecs/Location";
 import { RunRenderBounds } from "Ecs/RenderBounds";
 import { Data, World } from "Game/GameComponents";
 import { SpawnPlayer, ControlPlayer } from "Game/Player";
-import { ReapBullets } from "Game/Weapons";
+import { ReapBullets, BulletCollide } from "Game/Weapons";
 import { SpawnStalacfite, StalacfiteThink } from "Game/Enemy/Stalacfite";
 
 const PHYSICS_FPS = 40;
@@ -34,9 +34,8 @@ export class Shooter {
             DumbMotion(this.data, interval);
 
             // PHASE: React
-            FindCollisions(this.data, 50, (className) => {
-                switch(className) {
-                }
+            FindCollisions(this.data, 50, (className, source, target) => {
+                BulletCollide(this.data, className, source, target);
             });
 
             // PHASE: reaping
