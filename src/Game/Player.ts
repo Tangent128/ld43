@@ -18,3 +18,7 @@ export function SpawnPlayer(data: Data, world: World): Id {
         renderBounds: new RenderBounds("#fff", world.shipLayer)
     });
 }
+
+export function ControlPlayer(data: Data, world: World) {
+    world.debug["ControlPlayer"] = [dx, dy];
+}

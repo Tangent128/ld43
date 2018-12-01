@@ -1,10 +1,13 @@
 import { Layer, DrawSet } from "Applet/Render";
 import { Store } from "Ecs/Data";
 import { Data as EcsData } from "Ecs/Components";
+import { PlayerControl } from "./Input";
 
 export class World {
     width = 500;
     height = 400;
+
+    playerInput = new PlayerControl();
 
     /*
      * Drawing Layers
@@ -20,7 +23,6 @@ export class World {
      * Catch-all debug tool
      */
     debug: Record<string, any> = {
-        debug: "works"
     };
     drawDebug(drawSet: DrawSet, color: string) {
         drawSet.queue(this.hudLayer.toRender((cx, dt) => {

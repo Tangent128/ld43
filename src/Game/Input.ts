@@ -1,0 +1,45 @@
+import { KeyHandler, KeyName } from "Applet/Keyboard";
+
+export class PlayerControl implements KeyHandler {
+    dx = 0;
+    dy = 0;
+
+    press(key: KeyName) {
+        switch(key) {
+            case "up":
+                this.dy = -1;
+                break;
+            case "down":
+                this.dy = 1;
+                break;
+            case "left":
+                this.dx = -1;
+                break;
+            case "right":
+                this.dx = 1;
+                break;
+        }
+    }
+
+    release(key: KeyName) {
+        switch(key) {
+            case "up":
+                this.dy = Math.max(this.dy, 0);
+                break;
+            case "down":
+                this.dy = Math.min(this.dy, 0);
+                break;
+            case "left":
+                this.dx = Math.max(this.dx, 0);
+                break;
+            case "right":
+                this.dx = Math.min(this.dx, 0);
+                break;
+        }
+    }
+
+    block() {
+        this.dx = 0;
+        this.dy = 0;
+    }
+}

@@ -6,7 +6,7 @@ import { FindCollisions } from "Ecs/Collision";
 import { DumbMotion } from "Ecs/Location";
 import { RunRenderBounds } from "Ecs/RenderBounds";
 import { Data, World } from "Game/GameComponents";
-import { SpawnPlayer } from "Game/Player";
+import { SpawnPlayer, ControlPlayer } from "Game/Player";
 
 const PHYSICS_FPS = 16;
 
@@ -23,8 +23,14 @@ export class Shooter {
          * Physics Tick
          */
         interval => {
+
+            // PHASE: Input
+            ControlPlayer(this.data, this.world);
+
+            // PHASE: Update
             DumbMotion(this.data, interval);
 
+            // PHASE: React
             FindCollisions(this.data, 50).forEach(({className}) => {
                 switch(className) {
                 }
@@ -47,5 +53,7 @@ export class Shooter {
     constructor(public canvas: HTMLCanvasElement, public cx: CanvasRenderingContext2D, public keys: KeyControl) {
         SpawnPlayer(this.data, this.world);
         this.gameLoop.start();
+        this.keys.setHandler(this.world.playerInput);
+        this.keys.focus();
     }
 }
