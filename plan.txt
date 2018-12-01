@@ -47,11 +47,11 @@ priority:
 - lose screen
 - win screen
 - CUT DEMO
-- level transition
 
 phase II?
-- all weapons
 - boss
+- level transition
+- all weapons
 - lose weapon to boss
 
 tbd:
