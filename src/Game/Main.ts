@@ -39,6 +39,7 @@ export class Shooter {
             this.cx.fillRect(0, 0, this.world.width, this.world.height);
 
             RunRenderBounds(this.data, drawSet);
+            this.world.drawDebug(drawSet, "#f00");
 
             drawSet.draw(this.cx, dt);
         });
