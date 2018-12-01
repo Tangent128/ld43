@@ -25,7 +25,7 @@ export function ReapBullets(data: Data, {width, height, debug}: World) {
     let bulletCount = 0;
     Join(data, "location", "bullet").forEach(([id, {X, Y}, bullet]) => {
         bulletCount++;
-        if(X < PADDING || X > width + PADDING || Y < PADDING || Y > height + PADDING) {
+        if(X < -PADDING || X > width + PADDING || Y < -PADDING || Y > height + PADDING) {
             Remove(data, id);
         }
     });
