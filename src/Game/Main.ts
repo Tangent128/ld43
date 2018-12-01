@@ -26,23 +26,24 @@ export class Shooter {
          * Physics Tick
          */
         interval => {
+            const {data, world} = this;
 
             // PHASE: Input/AI
-            ControlPlayer(this.data, this.world, interval);
-            StalacfiteThink(this.data, this.world, interval);
+            ControlPlayer(data, world, interval);
+            StalacfiteThink(data, world, interval);
 
             // PHASE: Update
-            DumbMotion(this.data, interval);
+            DumbMotion(data, interval);
 
             // PHASE: React
-            FindCollisions(this.data, 50, (className, source, target) => {
-                BulletCollide(this.data, className, source, target);
-                PlayerCollide(this.data, className, source, target);
+            FindCollisions(data, 50, (className, source, target) => {
+                BulletCollide(data, className, source, target);
+                PlayerCollide(data, className, source, target);
             });
 
             // PHASE: reaping
-            CheckHp(this.data, this.world);
-            ReapBullets(this.data, this.world);
+            CheckHp(data, world);
+            ReapBullets(data, world);
         },
         /**
          * Drawing Tick
