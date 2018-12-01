@@ -1,9 +1,10 @@
-import { Id, Create, Join } from "Ecs/Data";
+import { Id, Create, Join, Remove } from "Ecs/Data";
 import { Polygon, Location, RenderBounds } from "Ecs/Components";
-import { Data, World } from "Game/GameComponents";
+import { Data, World, Bullet, Teams } from "Game/GameComponents";
 
 export function SpawnBullet(data: Data, world: World, x: number, y: number): Id {
     return Create(data, {
+        bullet: new Bullet(Teams.PLAYER),
         location: new Location({
             X: x,
             Y: y,
@@ -17,4 +18,16 @@ export function SpawnBullet(data: Data, world: World, x: number, y: number): Id 
         ]),
         renderBounds: new RenderBounds("#ff8", world.shipLayer)
     });
+}
+
+const PADDING = 30;
+export function ReapBullets(data: Data, {width, height, debug}: World) {
+    let bulletCount = 0;
+    Join(data, "location", "bullet").forEach(([id, {X, Y}, bullet]) => {
+        bulletCount++;
+        if(X < PADDING || X > width + PADDING || Y < PADDING || Y > height + PADDING) {
+            Remove(data, id);
+        }
+    });
+    debug["bullets"] = bulletCount;
 }

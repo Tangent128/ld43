@@ -7,6 +7,7 @@ import { DumbMotion } from "Ecs/Location";
 import { RunRenderBounds } from "Ecs/RenderBounds";
 import { Data, World } from "Game/GameComponents";
 import { SpawnPlayer, ControlPlayer } from "Game/Player";
+import { ReapBullets } from "Game/Weapons";
 
 const PHYSICS_FPS = 40;
 
@@ -35,6 +36,9 @@ export class Shooter {
                 switch(className) {
                 }
             });
+
+            // PHASE: reaping
+            ReapBullets(this.data, this.world);
         },
         /**
          * Drawing Tick

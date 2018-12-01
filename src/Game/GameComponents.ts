@@ -39,8 +39,19 @@ export class World {
 
 export class Data extends EcsData {
     playerShip: Store<PlayerShip> = {};
+    bullet: Store<Bullet> = {};
 }
 
 export class PlayerShip {
     firingCooldown = 0;
+}
+
+export enum Teams {
+    PLAYER,
+    ENEMY
+}
+export class Bullet {
+    constructor(
+        public team: Teams
+    ) {};
 }
