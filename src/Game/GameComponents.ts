@@ -2,6 +2,7 @@ import { Layer, DrawSet } from "Applet/Render";
 import { Store } from "Ecs/Data";
 import { Data as EcsData } from "Ecs/Components";
 import { PlayerControl } from "Game/Input";
+import { Stalacfite } from "Game/Enemy/Stalacfite";
 
 export class World {
     width = 500;
@@ -40,6 +41,7 @@ export class World {
 export class Data extends EcsData {
     bullet: Store<Bullet> = {};
     playerShip: Store<PlayerShip> = {};
+    stalacfite: Store<Stalacfite> = {};
 }
 
 export class PlayerShip {
