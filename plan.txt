@@ -40,10 +40,8 @@ scenery:
 - "welcome to level" sign
 
 priority:
-- win screen
-- respawn player
-- limit lives
 - lose screen
+- mercy invincible
 - CUT DEMO
 
 phase II?
