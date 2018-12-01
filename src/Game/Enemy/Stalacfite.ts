@@ -57,8 +57,6 @@ export function StalacfiteThink(data: Data, {width, height, debug}: World, inter
             location.VY += 500 * interval;
         }
 
-        debug["stalacfite ai"] = stalacfite;
-
         if(location.Y > height + PADDING) {
             Remove(data, id);
         }

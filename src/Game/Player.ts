@@ -55,7 +55,6 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
         } else {
             ship.firingCooldown = Math.max(0, ship.firingCooldown - interval);
         }
-        world.debug["weapon"] = {firing, cooldown: Math.floor(ship.firingCooldown*1000)};
     });
 
     // edge-triggered
