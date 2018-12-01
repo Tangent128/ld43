@@ -8,7 +8,7 @@ import { RunRenderBounds } from "Ecs/RenderBounds";
 import { Data, World } from "Game/GameComponents";
 import { SpawnPlayer, ControlPlayer } from "Game/Player";
 
-const PHYSICS_FPS = 16;
+const PHYSICS_FPS = 40;
 
 @Game("#Shooter")
 export class Shooter {
