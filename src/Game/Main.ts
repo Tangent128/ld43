@@ -28,7 +28,7 @@ export class Shooter {
 
             // PHASE: Input/AI
             ControlPlayer(this.data, this.world, interval);
-            StalacfiteThink(this.data, this.world);
+            StalacfiteThink(this.data, this.world, interval);
 
             // PHASE: Update
             DumbMotion(this.data, interval);
@@ -58,7 +58,9 @@ export class Shooter {
 
     constructor(public canvas: HTMLCanvasElement, public cx: CanvasRenderingContext2D, public keys: KeyControl) {
         SpawnPlayer(this.data, this.world);
-        SpawnStalacfite(this.data, this.world, this.world.width / 2)
+        SpawnStalacfite(this.data, this.world, this.world.width * 0.3)
+        SpawnStalacfite(this.data, this.world, this.world.width * 0.5)
+        SpawnStalacfite(this.data, this.world, this.world.width * 0.7)
         this.gameLoop.start();
         this.keys.setHandler(this.world.playerInput);
         this.keys.focus();
