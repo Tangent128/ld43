@@ -21,11 +21,15 @@ export function SpawnPlayer(data: Data, world: World): Id {
 }
 
 export function ControlPlayer(data: Data, world: World) {
-    const {dx, dy} = world.playerInput;
+    const {dx, dy, firing, weaponCycle} = world.playerInput;
     const diagonalSlowdown = (dx != 0 && dy != 0) ? 0.7 : 1;
+
     Join(data, "playerShip", "location").forEach(([id, ship, location]) => {
         location.VX = dx * 300 * diagonalSlowdown;
         location.VY = dy * 200 * diagonalSlowdown;
     });
-    world.debug["ControlPlayer"] = [dx, dy];
+
+    // edge-triggered
+    world.playerInput.weaponCycle = false;
+    world.debug["ControlPlayer"] = [dx, dy, firing, weaponCycle];
 }
