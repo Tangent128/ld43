@@ -26,7 +26,13 @@ export class World {
     height = 400;
 
     playerInput = new PlayerControl();
+
+    /*
+     * Core Game Status
+     */
     phase = GamePhase.PLAYING;
+    respawnCooldown = 0;
+    lives = 3;
 
     constructor(
         /**
@@ -34,6 +40,7 @@ export class World {
          */
         public level: Level
     ) {}
+
     /*
      * Drawing Layers
      */

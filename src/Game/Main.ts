@@ -7,9 +7,9 @@ import { DumbMotion } from "Ecs/Location";
 import { RunRenderBounds, RunRenderSprites } from "Ecs/Renderers";
 import { CheckHp } from "Game/Death";
 import { Data, World, GamePhase, SPLASH_SHEET } from "Game/GameComponents";
-import { SpawnPlayer, ControlPlayer, PlayerCollide } from "Game/Player";
+import { ControlPlayer, PlayerCollide, RespawnPlayer } from "Game/Player";
 import { ReapBullets, BulletCollide } from "Game/Weapons";
-import { SpawnStalacfite, StalacfiteThink } from "Game/Enemy/Stalacfite";
+import { StalacfiteThink } from "Game/Enemy/Stalacfite";
 import { CaveLevel } from "Level/Cave";
 
 const PHYSICS_FPS = 40;
@@ -46,6 +46,7 @@ export class Shooter {
             // PHASE: reaping
             CheckHp(data, world);
             ReapBullets(data, world);
+            RespawnPlayer(data, world, interval);
         },
         /**
          * Drawing Tick
@@ -67,7 +68,6 @@ export class Shooter {
         });
 
     constructor(public canvas: HTMLCanvasElement, public cx: CanvasRenderingContext2D, public keys: KeyControl) {
-        SpawnPlayer(this.data, this.world);
         this.gameLoop.start();
         this.keys.setHandler(this.world.playerInput);
         this.keys.focus();

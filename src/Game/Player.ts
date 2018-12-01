@@ -1,6 +1,6 @@
 import { Id, Create, Join, Lookup } from "Ecs/Data";
 import { Polygon, Location, RenderBounds, CollisionClass } from "Ecs/Components";
-import { Data, World, PlayerShip, Hp, Teams } from "Game/GameComponents";
+import { Data, World, PlayerShip, Hp, Teams, GamePhase } from "Game/GameComponents";
 import { SpawnBullet } from "Game/Weapons";
 
 export function SpawnPlayer(data: Data, world: World): Id {
@@ -22,6 +22,25 @@ export function SpawnPlayer(data: Data, world: World): Id {
         ]),
         renderBounds: new RenderBounds("#fff", world.shipLayer)
     });
+}
+
+export function RespawnPlayer(data: Data, world: World, interval: number) {
+    const playerDead = Join(data, "playerShip").length == 0;
+
+    if(world.respawnCooldown > 0) {
+        world.respawnCooldown = Math.max(world.respawnCooldown - interval, 0);
+    } else if(playerDead) {
+        if(world.lives > 0) {
+            SpawnPlayer(data, world);
+            world.lives--;
+        } else {
+            world.phase = GamePhase.LOST;
+        }
+    } else {
+        world.respawnCooldown = 2;
+    }
+
+    world.debug.lives = world.lives;
 }
 
 export function ControlPlayer(data: Data, world: World, interval: number) {
