@@ -1,0 +1,51 @@
+Player
+Cycle
+Enemies
+- types
+- spawning
+-- one type
+- Bosses
+-- weapons
+Backgrounds
+Title screen
+- cycle
+Sounds
+Sprites
+- Enemies
+Weapons
+Particles
+- explosions
+
+collision types:
+- bullet>enemy
+- enemy>player
+-
+
+
+globals:
+- level
+-- spawner
+-- bgcolor
+
+spawner:
+- clock
+- time -> enemy pattern
+- scenery pattern -> recovery time
+
+
+scenery:
+- ground texture
+- bushes
+- "welcome to level" sign
+
+priority:
+- movable player
+- bounds enforcement
+- one weapon
+- one enemy
+- respawn player
+- enemy spawner
+- limit lives
+- lose screen
+- win screen
+- level transition
