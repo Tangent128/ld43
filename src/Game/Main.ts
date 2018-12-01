@@ -5,6 +5,7 @@ import { DrawSet } from "Applet/Render";
 import { FindCollisions } from "Ecs/Collision";
 import { DumbMotion } from "Ecs/Location";
 import { RunRenderBounds } from "Ecs/RenderBounds";
+import { CheckHp } from "Game/Death";
 import { Data, World } from "Game/GameComponents";
 import { SpawnPlayer, ControlPlayer } from "Game/Player";
 import { ReapBullets, BulletCollide } from "Game/Weapons";
@@ -39,6 +40,7 @@ export class Shooter {
             });
 
             // PHASE: reaping
+            CheckHp(this.data, this.world);
             ReapBullets(this.data, this.world);
         },
         /**
