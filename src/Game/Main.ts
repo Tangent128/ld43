@@ -6,7 +6,7 @@ import { FindCollisions } from "Ecs/Collision";
 import { DumbMotion } from "Ecs/Location";
 import { RunRenderBounds, RunRenderSprites } from "Ecs/Renderers";
 import { CheckHp } from "Game/Death";
-import { Data, World } from "Game/GameComponents";
+import { Data, World, GamePhase, SPLASH_SHEET } from "Game/GameComponents";
 import { SpawnPlayer, ControlPlayer, PlayerCollide } from "Game/Player";
 import { ReapBullets, BulletCollide } from "Game/Weapons";
 import { SpawnStalacfite, StalacfiteThink } from "Game/Enemy/Stalacfite";
@@ -55,12 +55,15 @@ export class Shooter {
             this.cx.fillStyle = "#333";
             this.cx.fillRect(0, 0, this.world.width, this.world.height);
 
-            const {data} = this;
+            const {data, world: {phase}} = this;
             RunRenderBounds(data, drawSet);
             RunRenderSprites(data, drawSet);
             this.world.drawDebug(drawSet, "#f00");
 
             drawSet.draw(this.cx, dt);
+            if(phase == GamePhase.WON) {
+                SPLASH_SHEET.render(this.cx, 0);
+            }
         });
 
     constructor(public canvas: HTMLCanvasElement, public cx: CanvasRenderingContext2D, public keys: KeyControl) {

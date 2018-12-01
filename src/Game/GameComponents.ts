@@ -1,9 +1,18 @@
-import { Layer, DrawSet } from "Applet/Render";
+import { Layer, DrawSet, SpriteSheet } from "Applet/Render";
 import { Store } from "Ecs/Data";
 import { Data as EcsData } from "Ecs/Components";
 import { PlayerControl } from "Game/Input";
+import splashUrl from "Game/Splashscreens.png";
 import { Stalacfite } from "Game/Enemy/Stalacfite";
 import { Level } from "Level/Level";
+
+function loadImage(url: string) {
+    const image = new Image();
+    image.src = url
+    return image;
+};
+
+export const SPLASH_SHEET = new SpriteSheet(loadImage(splashUrl), 500, 400);
 
 export enum GamePhase {
     TITLE,
