@@ -1,5 +1,5 @@
-import { Id } from "Ecs/Data";
-import { Data, World } from "Game/GameComponents";
+import { Id, Join } from "Ecs/Data";
+import { Data, World, Teams, GamePhase } from "Game/GameComponents";
 
 type Spawner = (data: Data, world: World, x: number) => Id;
 
@@ -21,6 +21,10 @@ export class Level {
     }
 
     tick(data: Data, world: World, interval: number) {
+        const fieldClear = Join(data, "hp")
+            .filter(([id, {team}]) => team == Teams.ENEMY)
+            .length == 0;
+
         if(this.cooldown > 0) {
             this.cooldown = Math.max(this.cooldown - interval, 0);
         } else if(this.wave < this.waves.length) {
@@ -30,7 +34,10 @@ export class Level {
             wave.pattern.spawn(data, world);
 
             this.wave++;
+        } else if(fieldClear && world.phase == GamePhase.PLAYING) {
+            world.phase = GamePhase.WON;
         }
+        world.debug["phase"] = world.phase;
     }
 }
 

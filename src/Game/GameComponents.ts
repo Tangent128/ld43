@@ -5,11 +5,19 @@ import { PlayerControl } from "Game/Input";
 import { Stalacfite } from "Game/Enemy/Stalacfite";
 import { Level } from "Level/Level";
 
+export enum GamePhase {
+    TITLE,
+    PLAYING,
+    PAUSED,
+    LOST,
+    WON
+}
 export class World {
     width = 500;
     height = 400;
 
     playerInput = new PlayerControl();
+    phase = GamePhase.PLAYING;
 
     constructor(
         /**
