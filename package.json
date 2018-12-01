@@ -1,7 +1,7 @@
 {
-  "name": "base2018",
+  "name": "ld43",
   "version": "1.0.0",
-  "description": "Possible base code for Ludum Dare/Jam",
+  "description": "Sacrifices must be made",
   "private": true,
   "scripts": {
     "build": "webpack",
