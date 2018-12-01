@@ -3,6 +3,7 @@ import { Store } from "Ecs/Data";
 import { Data as EcsData } from "Ecs/Components";
 import { PlayerControl } from "Game/Input";
 import { Stalacfite } from "Game/Enemy/Stalacfite";
+import { Level } from "Level/Level";
 
 export class World {
     width = 500;
@@ -10,6 +11,12 @@ export class World {
 
     playerInput = new PlayerControl();
 
+    constructor(
+        /**
+         * Spawns waves of enemies & scenery
+         */
+        public level: Level
+    ) {}
     /*
      * Drawing Layers
      */

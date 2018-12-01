@@ -10,12 +10,13 @@ import { Data, World } from "Game/GameComponents";
 import { SpawnPlayer, ControlPlayer, PlayerCollide } from "Game/Player";
 import { ReapBullets, BulletCollide } from "Game/Weapons";
 import { SpawnStalacfite, StalacfiteThink } from "Game/Enemy/Stalacfite";
+import { CaveLevel } from "Level/Cave";
 
 const PHYSICS_FPS = 40;
 
 @Game("#Shooter")
 export class Shooter {
-    world = new World();
+    world = new World(new CaveLevel());
     data = new Data();
 
     /**
@@ -31,6 +32,7 @@ export class Shooter {
             // PHASE: Input/AI
             ControlPlayer(data, world, interval);
             StalacfiteThink(data, world, interval);
+            world.level.tick(data, world, interval);
 
             // PHASE: Update
             DumbMotion(data, interval);
@@ -61,9 +63,6 @@ export class Shooter {
 
     constructor(public canvas: HTMLCanvasElement, public cx: CanvasRenderingContext2D, public keys: KeyControl) {
         SpawnPlayer(this.data, this.world);
-        SpawnStalacfite(this.data, this.world, this.world.width * 0.3)
-        SpawnStalacfite(this.data, this.world, this.world.width * 0.5)
-        SpawnStalacfite(this.data, this.world, this.world.width * 0.7)
         this.gameLoop.start();
         this.keys.setHandler(this.world.playerInput);
         this.keys.focus();
