@@ -4,7 +4,7 @@ import { Loop } from "Applet/Loop";
 import { DrawSet } from "Applet/Render";
 import { FindCollisions } from "Ecs/Collision";
 import { DumbMotion } from "Ecs/Location";
-import { RunRenderBounds } from "Ecs/RenderBounds";
+import { RunRenderBounds, RunRenderSprites } from "Ecs/Renderers";
 import { CheckHp } from "Game/Death";
 import { Data, World } from "Game/GameComponents";
 import { SpawnPlayer, ControlPlayer, PlayerCollide } from "Game/Player";
@@ -55,7 +55,9 @@ export class Shooter {
             this.cx.fillStyle = "#333";
             this.cx.fillRect(0, 0, this.world.width, this.world.height);
 
-            RunRenderBounds(this.data, drawSet);
+            const {data} = this;
+            RunRenderBounds(data, drawSet);
+            RunRenderSprites(data, drawSet);
             this.world.drawDebug(drawSet, "#f00");
 
             drawSet.draw(this.cx, dt);
