@@ -40,7 +40,6 @@ scenery:
 - "welcome to level" sign
 
 priority:
-- bounds enforcement
 - one weapon
 - one enemy
 - respawn player
