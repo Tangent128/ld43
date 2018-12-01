@@ -40,12 +40,13 @@ scenery:
 - "welcome to level" sign
 
 priority:
-- lose screen
-- mercy invincible
-- CUT DEMO
-
-phase II?
 - boss
+- swoop enemy
+- back weapon
+- weapon cycling
+- enemy art pass
+
+phase III?
 - level transition
 - all weapons
 - lose weapon to boss
