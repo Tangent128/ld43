@@ -1,6 +1,7 @@
 import { Id, Create, Join } from "Ecs/Data";
 import { Polygon, Location, RenderBounds } from "Ecs/Components";
 import { Data, World, PlayerShip } from "Game/GameComponents";
+import { SpawnBullet } from "Game/Weapons";
 
 export function SpawnPlayer(data: Data, world: World): Id {
     return Create(data, {
@@ -48,7 +49,7 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
 
         // PHASE: Firing
         if(firing && ship.firingCooldown <= 0) {
-            FireForwardGun(data, ship, location.X, location.Y);
+            FireForwardGun(data, world, ship, location.X, location.Y);
         } else {
             ship.firingCooldown = Math.max(0, ship.firingCooldown - interval);
         }
@@ -59,6 +60,7 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
     world.playerInput.weaponCycle = false;
 }
 
-function FireForwardGun(data: Data, ship: PlayerShip, x: number, y: number) {
+function FireForwardGun(data: Data, world: World, ship: PlayerShip, x: number, y: number) {
     ship.firingCooldown = 0.3;
+    SpawnBullet(data, world, x, y);
 }
