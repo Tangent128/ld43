@@ -26,6 +26,7 @@ globals:
 - level
 -- spawner
 -- bgcolor
+- layers
 
 spawner:
 - clock
@@ -39,7 +40,6 @@ scenery:
 - "welcome to level" sign
 
 priority:
-- movable player
 - bounds enforcement
 - one weapon
 - one enemy
@@ -48,4 +48,16 @@ priority:
 - limit lives
 - lose screen
 - win screen
+- CUT DEMO
 - level transition
+
+phase II?
+- all weapons
+- boss
+- lose weapon to boss
+
+tbd:
+- image pass
+- audio pass
+- all enemies
+- scenery
