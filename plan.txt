@@ -40,12 +40,10 @@ scenery:
 - "welcome to level" sign
 
 priority:
-- one enemy
+- win screen
 - respawn player
-- enemy spawner
 - limit lives
 - lose screen
-- win screen
 - CUT DEMO
 
 phase II?
