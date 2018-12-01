@@ -40,7 +40,6 @@ scenery:
 - "welcome to level" sign
 
 priority:
-- one weapon
 - one enemy
 - respawn player
 - enemy spawner

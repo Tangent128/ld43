@@ -14,7 +14,7 @@ export function SpawnBullet(data: Data, world: World, x: number, y: number): Id 
             -3, -10,
             -3, 0,
             3, 0,
-            3, 10
+            3, -10
         ]),
         renderBounds: new RenderBounds("#ff8", world.shipLayer)
     });

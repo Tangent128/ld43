@@ -61,6 +61,6 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
 }
 
 function FireForwardGun(data: Data, world: World, ship: PlayerShip, x: number, y: number) {
-    ship.firingCooldown = 0.3;
+    ship.firingCooldown = 0.2;
     SpawnBullet(data, world, x, y);
 }
