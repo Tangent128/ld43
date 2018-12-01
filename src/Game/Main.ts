@@ -31,7 +31,7 @@ export class Shooter {
             DumbMotion(this.data, interval);
 
             // PHASE: React
-            FindCollisions(this.data, 50).forEach(({className}) => {
+            FindCollisions(this.data, 50, (className) => {
                 switch(className) {
                 }
             });
