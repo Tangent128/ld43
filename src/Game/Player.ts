@@ -20,7 +20,7 @@ export function SpawnPlayer(data: Data, world: World): Id {
             0, -15,
             -15, 0
         ]),
-        renderBounds: new RenderBounds("#fff", world.shipLayer)
+        renderBounds: new RenderBounds("#ff0", world.shipLayer)
     });
 }
 
@@ -47,7 +47,7 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
     const {dx, dy, firing, weaponCycle} = world.playerInput;
     const diagonalSlowdown = (dx != 0 && dy != 0) ? 0.7 : 1;
 
-    Join(data, "playerShip", "location").forEach(([id, ship, location]) => {
+    Join(data, "playerShip", "location", "renderBounds", "hp").forEach(([id, ship, location, renderBounds, hp]) => {
         // PHASE: Movement
         const overLeftEdge = location.X < 15;
         const overRightEdge = location.X > (world.width - 15);
@@ -74,6 +74,16 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
         } else {
             ship.firingCooldown = Math.max(0, ship.firingCooldown - interval);
         }
+
+        // PHASE: Mercy Invincibility
+        if(ship.mercyCooldown > 0) {
+            ship.mercyCooldown = Math.max(0, ship.mercyCooldown - interval);
+            renderBounds.color = "#ff0";
+            hp.hp = 9999;
+        } else {
+            renderBounds.color = "#fff";
+            hp.hp = Math.min(hp.hp, 1);
+        }
     });
 
     // edge-triggered
@@ -90,7 +100,7 @@ export function PlayerCollide(data: Data, className: string, sourceId: Id, targe
         case "enemy>player":
             const [ship, hp] = Lookup(data, targetId, "playerShip", "hp");
             if(ship && hp) {
-                hp.hp = 0;
+                hp.hp -= 100;
             }
     }
 }
