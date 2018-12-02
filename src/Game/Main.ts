@@ -5,7 +5,7 @@ import { DrawSet } from "Applet/Render";
 import { FindCollisions } from "Ecs/Collision";
 import { DumbMotion } from "Ecs/Location";
 import { RunRenderBounds, RunRenderSprites } from "Ecs/Renderers";
-import { CheckHp } from "Game/Death";
+import { CheckHp, CheckLifetime, SmokeDamage } from "Game/Death";
 import { Data, World, GamePhase, SPLASH_SHEET } from "Game/GameComponents";
 import { ControlPlayer, PlayerCollide, RespawnPlayer } from "Game/Player";
 import { ReapBullets, BulletCollide } from "Game/Weapons";
@@ -42,10 +42,12 @@ export class Shooter {
                 BulletCollide(data, className, source, target);
                 PlayerCollide(data, className, source, target);
             });
+            SmokeDamage(data, world);
 
             // PHASE: reaping
             CheckHp(data, world);
             ReapBullets(data, world);
+            CheckLifetime(data, world, interval);
             RespawnPlayer(data, world, interval);
         },
         /**

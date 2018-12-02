@@ -57,6 +57,7 @@ export class World {
     debugLayer = new Layer(2);
     bulletLayer = new Layer(10);
     shipLayer = new Layer(15);
+    smokeLayer = new Layer(16);
     hudLayer = new Layer(20);
 
     /**
@@ -80,6 +81,7 @@ export class World {
 export class Data extends EcsData {
     bullet: Store<Bullet> = {};
     hp: Store<Hp> = {};
+    lifetime: Store<Lifetime> = {};
     playerShip: Store<PlayerShip> = {};
     stalacfite: Store<Stalacfite> = {};
 }
@@ -101,8 +103,15 @@ export class Bullet {
     ) {};
 }
 export class Hp {
+    receivedDamage = 0;
     constructor(
         public team: Teams,
         public hp: number
+    ) {};
+}
+
+export class Lifetime {
+    constructor(
+        public time: number
     ) {};
 }

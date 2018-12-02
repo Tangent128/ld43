@@ -29,6 +29,7 @@ export function BulletCollide(data: Data, className: string, sourceId: Id, targe
             const [hp] = Lookup(data, targetId, "hp");
             if(bullet && hp && (bullet.team != hp.team)) {
                 hp.hp -= bullet.attack;
+                hp.receivedDamage += bullet.attack;
                 bullet.hit = true;
                 PlaySfx(HIT_SOUND);
             }
