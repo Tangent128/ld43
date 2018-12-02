@@ -1,6 +1,7 @@
+import { PlaySfx } from "Applet/Audio";
 import { Id, Create, Join, Lookup } from "Ecs/Data";
 import { Polygon, Location, RenderBounds, CollisionClass } from "Ecs/Components";
-import { Data, World, PlayerShip, Hp, Teams, GamePhase } from "Game/GameComponents";
+import { Data, World, PlayerShip, Hp, Teams, GamePhase, SHOOT_SOUND } from "Game/GameComponents";
 import { SpawnBullet } from "Game/Weapons";
 
 export function SpawnPlayer(data: Data, world: World): Id {
@@ -93,6 +94,7 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
 function FireForwardGun(data: Data, world: World, ship: PlayerShip, x: number, y: number) {
     ship.firingCooldown = 0.2;
     SpawnBullet(data, world, x, y);
+    PlaySfx(SHOOT_SOUND);
 }
 
 export function PlayerCollide(data: Data, className: string, sourceId: Id, targetId: Id) {

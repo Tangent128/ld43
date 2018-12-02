@@ -1,8 +1,11 @@
 import { Layer, DrawSet, SpriteSheet } from "Applet/Render";
 import { Store } from "Ecs/Data";
 import { Data as EcsData } from "Ecs/Components";
+import bigBoomUrl from "Game/BigBoom.ogg";
 import hitUrl from "Game/Hit.ogg";
 import { PlayerControl } from "Game/Input";
+import shootUrl from "Game/Shoot.ogg";
+import boomUrl from "Game/SmallBoom.ogg";
 import splashUrl from "Game/Splashscreens.png";
 import { Stalacfite } from "Game/Enemy/Stalacfite";
 import { Level } from "Level/Level";
@@ -15,6 +18,9 @@ export const SPLASH_SHEET = new SpriteSheet(loadImage(splashUrl), 500, 400);
 
 // Sfx
 export const HIT_SOUND = new Audio(hitUrl);
+export const SHOOT_SOUND = new Audio(shootUrl);
+export const BOOM_SOUND = new Audio(boomUrl);
+export const BIG_BOOM_SOUND = new Audio(bigBoomUrl);
 
 export enum GamePhase {
     TITLE,
