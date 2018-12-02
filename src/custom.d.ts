@@ -1,7 +1,12 @@
 declare module "*.scss" {
 }
 
+declare module "*.ogg" {
+    const url: string;
+    export default url;
+}
+
 declare module "*.png" {
-    const content: string;
-    export default content;
+    const url: string;
+    export default url;
 }
