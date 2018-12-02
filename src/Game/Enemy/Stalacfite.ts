@@ -1,6 +1,7 @@
 import { Id, Create, Join, Remove } from "Ecs/Data";
 import { CollisionClass, Polygon, Location, RenderBounds } from "Ecs/Components";
 import { Data, World, Hp, Teams } from "Game/GameComponents";
+import { EvenPattern } from "Level/Level";
 
 enum Thought {
     SPAWNING,
@@ -57,9 +58,10 @@ export function SpawnStalacfiteDx(data: Data, world: World, x: number): Id {
 }
 
 const PADDING = 50;
-export function StalacfiteThink(data: Data, {width, height, debug}: World, interval: number) {
+export function StalacfiteThink(data: Data, world: World, interval: number) {
+    const {height, debug} = world;
     let count = 0;
-    Join(data, "stalacfite", "location").forEach(([id, stalacfite, location]) => {
+    Join(data, "stalacfite", "location", "hp").forEach(([id, stalacfite, location, hp]) => {
         count++;
 
         const aiCoolingDown = stalacfite.aiCooldown > 0;
@@ -74,6 +76,7 @@ export function StalacfiteThink(data: Data, {width, height, debug}: World, inter
         } else if(stalacfite.thinking == Thought.DWELLING) {
             location.VY = Math.max(location.VY - 70 * interval, 0);
             if(stalacfite.bossMode) {
+                // aim at player
                 const target = Join(data, "playerShip", "location")[0];
                 if(target) {
                     const dx = target[2].X - location.X;
@@ -83,6 +86,8 @@ export function StalacfiteThink(data: Data, {width, height, debug}: World, inter
                         location.VX = 0;
                     }
                 }
+                // heal
+                hp.hp = Math.min(hp.hp + 150 * interval, 2000);
             }
             if(!aiCoolingDown) {
                 stalacfite.thinking = Thought.DROPPING;
@@ -103,6 +108,9 @@ export function StalacfiteThink(data: Data, {width, height, debug}: World, inter
         } else if(location.Y < -PADDING && stalacfite.thinking == Thought.RISING) {
             stalacfite.thinking = Thought.DWELLING;
             stalacfite.aiCooldown = Math.random()*2 + 1;
+            // spawn some fodder
+            const spawner = new EvenPattern(40, SpawnStalacfite, SpawnStalacfite, SpawnStalacfite, SpawnStalacfite);
+            spawner.spawn(data, world);
         }
     });
     debug["stalacfites"] = count;
