@@ -59,7 +59,7 @@ export function SpawnStalacfiteDx(data: Data, world: World, x: number): Id {
 const PADDING = 50;
 export function StalacfiteThink(data: Data, {width, height, debug}: World, interval: number) {
     let count = 0;
-    Join(data, "location", "stalacfite").forEach(([id, location, stalacfite]) => {
+    Join(data, "stalacfite", "location").forEach(([id, stalacfite, location]) => {
         count++;
 
         const aiCoolingDown = stalacfite.aiCooldown > 0;
@@ -73,12 +73,23 @@ export function StalacfiteThink(data: Data, {width, height, debug}: World, inter
             stalacfite.aiCooldown = Math.random()*1.5 + 0.5;
         } else if(stalacfite.thinking == Thought.DWELLING) {
             location.VY = Math.max(location.VY - 70 * interval, 0);
-            stalacfite.thinking = Thought.DWELLING;
+            if(stalacfite.bossMode) {
+                const target = Join(data, "playerShip", "location")[0];
+                if(target) {
+                    const dx = target[2].X - location.X;
+                    if(Math.abs(dx) > 10) {
+                        location.VX = Math.sign(dx) * 150;
+                    } else {
+                        location.VX = 0;
+                    }
+                }
+            }
             if(!aiCoolingDown) {
                 stalacfite.thinking = Thought.DROPPING;
             }
         } else if(stalacfite.thinking == Thought.DROPPING) {
             location.VY += 500 * interval;
+            location.VX = 0;
         } else if(stalacfite.thinking == Thought.RISING) {
             location.VY = -150;
         }
