@@ -1,18 +1,20 @@
 import { Layer, DrawSet, SpriteSheet } from "Applet/Render";
 import { Store } from "Ecs/Data";
 import { Data as EcsData } from "Ecs/Components";
+import hitUrl from "Game/Hit.ogg";
 import { PlayerControl } from "Game/Input";
 import splashUrl from "Game/Splashscreens.png";
 import { Stalacfite } from "Game/Enemy/Stalacfite";
 import { Level } from "Level/Level";
 
 function loadImage(url: string) {
-    const image = new Image();
-    image.src = url
-    return image;
+    return Object.assign(new Image(), {src: url});
 };
-
+// Images
 export const SPLASH_SHEET = new SpriteSheet(loadImage(splashUrl), 500, 400);
+
+// Sfx
+export const HIT_SOUND = new Audio(hitUrl);
 
 export enum GamePhase {
     TITLE,

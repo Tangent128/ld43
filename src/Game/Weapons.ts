@@ -1,6 +1,7 @@
+import { PlaySfx } from "Applet/Audio";
 import { Id, Create, Join, Remove, Lookup } from "Ecs/Data";
 import { Polygon, Location, RenderBounds, CollisionClass } from "Ecs/Components";
-import { Data, World, Bullet, Teams } from "Game/GameComponents";
+import { Data, World, Bullet, Teams, HIT_SOUND } from "Game/GameComponents";
 
 export function SpawnBullet(data: Data, world: World, x: number, y: number): Id {
     return Create(data, {
@@ -29,6 +30,7 @@ export function BulletCollide(data: Data, className: string, sourceId: Id, targe
             if(bullet && hp && (bullet.team != hp.team)) {
                 hp.hp -= bullet.attack;
                 bullet.hit = true;
+                PlaySfx(HIT_SOUND);
             }
     }
 }
