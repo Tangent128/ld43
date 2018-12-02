@@ -69,3 +69,26 @@ export class EvenPattern implements Pattern {
         }
     }
 }
+
+export class CenterPattern implements Pattern {
+    spawners: Spawner[];
+
+    constructor(
+        public spacing: number,
+        ...spawners: Spawner[]
+    ) {
+        this.spawners = spawners;
+    }
+
+    spawn(data: Data, world: World) {
+        const width = this.spacing * this.spawners.length;
+
+        let x = (this.spacing + world.width - width)/2;
+        const advance = width / this.spawners.length;
+
+        for(const spawner of this.spawners) {
+            spawner(data, world, x);
+            x += advance;
+        }
+    }
+}

@@ -5,11 +5,15 @@ import { Data, World, Hp, Teams } from "Game/GameComponents";
 enum Thought {
     SPAWNING,
     DWELLING,
-    DROPPING
+    DROPPING,
+    RISING
 }
 export class Stalacfite {
     thinking = Thought.SPAWNING;
     aiCooldown = 0;
+    constructor(
+        public bossMode = false
+    ) {}
 }
 
 export function SpawnStalacfite(data: Data, world: World, x: number): Id {
@@ -27,6 +31,26 @@ export function SpawnStalacfite(data: Data, world: World, x: number): Id {
             -20, -30,
             0, 40,
             20, -30
+        ]),
+        renderBounds: new RenderBounds("#a8f", world.shipLayer)
+    });
+}
+
+export function SpawnStalacfiteDx(data: Data, world: World, x: number): Id {
+    return Create(data, {
+        stalacfite: new Stalacfite(true),
+        collisionSourceClass: new CollisionClass("enemy"),
+        collisionTargetClass: new CollisionClass("enemy"),
+        hp: new Hp(Teams.ENEMY, 2000),
+        location: new Location({
+            X: x,
+            Y: -150,
+            VY: 100
+        }),
+        bounds: new Polygon([
+            -50, 0,
+            0, 150,
+            50, 0
         ]),
         renderBounds: new RenderBounds("#a8f", world.shipLayer)
     });
@@ -55,10 +79,19 @@ export function StalacfiteThink(data: Data, {width, height, debug}: World, inter
             }
         } else if(stalacfite.thinking == Thought.DROPPING) {
             location.VY += 500 * interval;
+        } else if(stalacfite.thinking == Thought.RISING) {
+            location.VY = -150;
         }
 
         if(location.Y > height + PADDING) {
-            Remove(data, id);
+            if(stalacfite.bossMode) {
+                stalacfite.thinking = Thought.RISING;
+            } else {
+                Remove(data, id);
+            }
+        } else if(location.Y < -PADDING && stalacfite.thinking == Thought.RISING) {
+            stalacfite.thinking = Thought.DWELLING;
+            stalacfite.aiCooldown = Math.random()*2 + 1;
         }
     });
     debug["stalacfites"] = count;
