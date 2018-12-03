@@ -12,6 +12,7 @@ export class Level {
     waves: Wave[] = [];
     wave = 0;
     cooldown = 0;
+    waitOnClear = false;
 
     addWave(pattern: Pattern, delay: number) {
         this.waves.push({
@@ -28,12 +29,15 @@ export class Level {
         if(this.cooldown > 0) {
             this.cooldown = Math.max(this.cooldown - interval, 0);
         } else if(this.wave < this.waves.length) {
-            const wave = this.waves[this.wave];
+            if(fieldClear || !this.waitOnClear) {
+                const wave = this.waves[this.wave];
 
-            this.cooldown = wave.cooldown;
-            wave.pattern.spawn(data, world);
+                this.cooldown = wave.cooldown;
+                this.waitOnClear = wave.cooldown == -1;
 
-            this.wave++;
+                wave.pattern.spawn(data, world);
+                this.wave++;
+            }
         } else if(fieldClear && world.phase == GamePhase.PLAYING) {
             world.phase = GamePhase.WON;
         }
