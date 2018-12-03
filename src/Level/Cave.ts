@@ -3,7 +3,7 @@ import { SpawnStalacfite, SpawnStalacfiteDx } from "Game/Enemy/Stalacfite";
 import { RGB } from "Game/GameComponents";
 
 export class CaveLevel extends Level {
-    bgColor = [48, 48, 48] as RGB;
+    bgColor = [48, 48, 64] as RGB;
     constructor(nextLevel?: Level) {
         super(nextLevel);
         this.addWave(new EvenPattern(40, SpawnStalacfite, SpawnStalacfite, SpawnStalacfite), 5);
