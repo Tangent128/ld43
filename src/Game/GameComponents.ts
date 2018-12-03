@@ -83,6 +83,8 @@ export class World {
             cx.fillStyle = color;
             let y = 12;
             for(const label in this.debug) {
+                cx.textAlign = "left";
+                cx.textBaseline = "middle";
                 cx.fillText(`${label}: ${JSON.stringify(this.debug[label])}`, 0, y, this.width);
                 y += 14;
             }
@@ -95,6 +97,7 @@ export class Data extends EcsData {
     bullet: Store<Bullet> = {};
     hp: Store<Hp> = {};
     lifetime: Store<Lifetime> = {};
+    message: Store<Message> = {};
     playerShip: Store<PlayerShip> = {};
     stalacfite: Store<Stalacfite> = {};
     swooparang: Store<Swooparang> = {};
@@ -136,5 +139,15 @@ export class Boss {
     killedBy: PlayerWeapons = PlayerWeapons.NONE;
     constructor(
         public name: string
+    ) {}
+}
+
+export class Message {
+    targetY = 0;
+    constructor(
+        public layer: Layer,
+        public color: string,
+        public message: string,
+        public timeout = 3
     ) {}
 }

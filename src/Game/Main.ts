@@ -13,6 +13,7 @@ import { StalacfiteThink } from "Game/Enemy/Stalacfite";
 import { SwooparangThink } from "Game/Enemy/Swooparang";
 import { CaveLevel } from "Level/Cave";
 import { PlainLevel } from "Level/Plain";
+import { ArrangeMessages, ReapMessages, RenderMessages } from "./Message";
 
 const PHYSICS_FPS = 40;
 
@@ -39,6 +40,7 @@ export class Shooter {
             ControlPlayer(data, world, interval);
             StalacfiteThink(data, world, interval);
             SwooparangThink(data, world, interval);
+            ArrangeMessages(data, world, interval);
 
             // PHASE: Update
             DumbMotion(data, interval);
@@ -57,6 +59,7 @@ export class Shooter {
             // PHASE: Reaping
             CheckHp(data, world);
             ReapBullets(data, world);
+            ReapMessages(data, world);
             CheckLifetime(data, world, interval);
         },
         /**
@@ -71,6 +74,7 @@ export class Shooter {
 
             RunRenderBounds(data, drawSet);
             RunRenderSprites(data, drawSet);
+            RenderMessages(data, drawSet);
             this.world.drawDebug(drawSet, "#f00");
 
             drawSet.draw(this.cx, dt);

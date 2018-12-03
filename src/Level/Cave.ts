@@ -1,11 +1,13 @@
 import { Level, EvenPattern, CenterPattern } from "./Level";
 import { SpawnStalacfite, SpawnStalacfiteDx } from "Game/Enemy/Stalacfite";
 import { RGB } from "Game/GameComponents";
+import { SpawnMessage } from "Game/Message";
 
 export class CaveLevel extends Level {
     bgColor = [48, 48, 64] as RGB;
     constructor(nextLevel?: Level) {
         super(nextLevel);
+        this.addWave(new CenterPattern(40, SpawnMessage("#ffa", "Welcome to The Caves")), 1);
         this.addWave(new EvenPattern(40, SpawnStalacfite, SpawnStalacfite, SpawnStalacfite), 5);
         this.addWave(new EvenPattern(100, SpawnStalacfite, SpawnStalacfite), 2);
         this.addWave(new EvenPattern(40, SpawnStalacfite, SpawnStalacfite), 2);
