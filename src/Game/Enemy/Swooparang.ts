@@ -1,6 +1,8 @@
 import { Id, Create, Join, Remove } from "Ecs/Data";
 import { CollisionClass, Polygon, Location, RenderBounds } from "Ecs/Components";
-import { Data, World, Hp, Teams } from "Game/GameComponents";
+import { Data, World, Hp, Teams, Boss, SHOOT_SOUND, PlayerWeapons } from "Game/GameComponents";
+import { SpawnBullet } from "Game/Weapons";
+import { PlaySfx } from "Applet/Audio";
 
 enum Thought {
     SPAWNING,
@@ -42,6 +44,37 @@ export function SpawnSwooparang(data: Data, world: World, x: number): Id {
             -12, -21
         ]),
         renderBounds: new RenderBounds("#8fa", world.shipLayer)
+    });
+}
+
+export function SpawnSwooparangDx(data: Data, world: World, x: number): Id {
+    return Create(data, {
+        swooparang: new Swooparang(true),
+        boss: new Boss("Heavy Swooparang"),
+        collisionSourceClass: new CollisionClass("enemy"),
+        collisionTargetClass: new CollisionClass("enemy"),
+        hp: new Hp(Teams.ENEMY, 500),
+        location: new Location({
+            X: x,
+            Y: -50,
+            Angle: -Math.PI/2,
+            VY: 250
+        }),
+        bounds: new Polygon([
+            -12, -30,
+            0, -35,
+            21, -21,
+            30, 0,
+            21, 21,
+            0, 35,
+            -12, 30,
+            -12, 21,
+            0, 21,
+            12, 0,
+            0, -21,
+            -12, -21
+        ]),
+        renderBounds: new RenderBounds("#f00", world.shipLayer)
     });
 }
 
@@ -93,15 +126,17 @@ export function SwooparangThink(data: Data, world: World, interval: number) {
                     if(!aiCoolingDown) {
                         swooparang.thinking = Thought.CHARGING;
                         swooparang.aiCooldown = 1;
+                        if(swooparang.bossMode) {
+                            SpawnBullet(data, world, location.X, location.Y, PlayerWeapons.NONE, location.Angle-0.2, 5, 600, Teams.ENEMY);
+                            SpawnBullet(data, world, location.X, location.Y, PlayerWeapons.NONE, location.Angle+0.2, 5, 600, Teams.ENEMY);
+                            PlaySfx(SHOOT_SOUND);
+                        }
                     }
                 } else if(angleDelta < 0) {
                     location.VAngle = -TURN_SPEED;
                 } else {
                     location.VAngle = TURN_SPEED;
                 }
-            }
-
-            if(swooparang.bossMode) {
             }
         }
         
@@ -111,7 +146,9 @@ export function SwooparangThink(data: Data, world: World, interval: number) {
 
             if(!aiCoolingDown) {
                 swooparang.thinking = Thought.DWELLING;
-                swooparang.aiCooldown = 1 + Math.random();
+                if(!swooparang.bossMode) {
+                    swooparang.aiCooldown = 1 + Math.random();
+                }
             }
         }
     });
