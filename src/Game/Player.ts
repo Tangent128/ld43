@@ -90,7 +90,14 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
             CycleWeapon(ship, world);
         }
         if(firing && ship.firingCooldown <= 0) {
-            FireForwardGun(data, world, ship, location.X, location.Y);
+            switch(ship.currentWeapon) {
+                case PlayerWeapons.SHOOTER:
+                    FireForwardGun(data, world, ship, location.X, location.Y);
+                    break;
+                case PlayerWeapons.BACK_FLARE:
+                    FireBackFlare(data, world, ship, location.X, location.Y);
+                    break;
+            }
         } else {
             ship.firingCooldown = Math.max(0, ship.firingCooldown - interval);
         }
@@ -116,6 +123,13 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
 function FireForwardGun(data: Data, world: World, ship: PlayerShip, x: number, y: number) {
     ship.firingCooldown = 0.2;
     SpawnBullet(data, world, x, y);
+    PlaySfx(SHOOT_SOUND);
+}
+function FireBackFlare(data: Data, world: World, ship: PlayerShip, x: number, y: number) {
+    ship.firingCooldown = 0.4;
+    SpawnBullet(data, world, x, y, Math.PI * 1.4, 150);
+    SpawnBullet(data, world, x, y, Math.PI * 1.5, 150);
+    SpawnBullet(data, world, x, y, Math.PI * 1.6, 150);
     PlaySfx(SHOOT_SOUND);
 }
 
