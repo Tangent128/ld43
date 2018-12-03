@@ -1,6 +1,6 @@
 import { Id, Create, Join, Remove } from "Ecs/Data";
 import { CollisionClass, Polygon, Location, RenderBounds } from "Ecs/Components";
-import { Data, World, Hp, Teams, Boss, SHOOT_SOUND, PlayerWeapons } from "Game/GameComponents";
+import { Data, World, Hp, Teams, Boss, PlayerWeapons, ENEMY_SHOOT_SOUND } from "Game/GameComponents";
 import { SpawnBullet } from "Game/Weapons";
 import { PlaySfx } from "Applet/Audio";
 
@@ -129,7 +129,7 @@ export function SwooparangThink(data: Data, world: World, interval: number) {
                         if(swooparang.bossMode) {
                             SpawnBullet(data, world, location.X, location.Y, PlayerWeapons.NONE, location.Angle-0.2, 5, 600, Teams.ENEMY);
                             SpawnBullet(data, world, location.X, location.Y, PlayerWeapons.NONE, location.Angle+0.2, 5, 600, Teams.ENEMY);
-                            PlaySfx(SHOOT_SOUND);
+                            PlaySfx(ENEMY_SHOOT_SOUND);
                         }
                     }
                 } else if(angleDelta < 0) {
