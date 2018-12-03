@@ -12,12 +12,13 @@ import { ReapBullets, BulletCollide } from "Game/Weapons";
 import { StalacfiteThink } from "Game/Enemy/Stalacfite";
 import { SwooparangThink } from "Game/Enemy/Swooparang";
 import { CaveLevel } from "Level/Cave";
+import { PlainLevel } from "Level/Plain";
 
 const PHYSICS_FPS = 40;
 
 @Game("#Shooter")
 export class Shooter {
-    world = new World(new CaveLevel());
+    world = new World(new PlainLevel());
     data = new Data();
 
     /**
