@@ -34,7 +34,7 @@ export class Level {
 
         if(this.cooldown > 0) {
             this.cooldown = Math.max(this.cooldown - interval, 0);
-        } else if(this.wave < this.waves.length) {
+        } else if(this.wave < this.waves.length && world.phase == GamePhase.PLAYING) {
             if(fieldClear || !this.waitOnClear) {
                 const wave = this.waves[this.wave];
 
