@@ -29,6 +29,11 @@ export enum GamePhase {
     LOST,
     WON
 }
+export enum PlayerWeapons {
+    NONE = 0,
+    SHOOTER = 1,
+    BACK_FLARE = 2
+}
 export class World {
     width = 500;
     height = 400;
@@ -41,6 +46,7 @@ export class World {
     phase = GamePhase.PLAYING;
     respawnCooldown = 0;
     lives = 3;
+    availableWeapons = [false, true, true];
 
     constructor(
         /**
@@ -89,6 +95,7 @@ export class Data extends EcsData {
 export class PlayerShip {
     firingCooldown = 0;
     mercyCooldown = 2;
+    currentWeapon: PlayerWeapons = PlayerWeapons.NONE;
 }
 
 export enum Teams {

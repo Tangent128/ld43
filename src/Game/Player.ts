@@ -1,12 +1,14 @@
 import { PlaySfx } from "Applet/Audio";
 import { Id, Create, Join, Lookup } from "Ecs/Data";
 import { Polygon, Location, RenderBounds, CollisionClass } from "Ecs/Components";
-import { Data, World, PlayerShip, Hp, Teams, GamePhase, SHOOT_SOUND } from "Game/GameComponents";
+import { Data, World, PlayerShip, Hp, Teams, GamePhase, SHOOT_SOUND, PlayerWeapons } from "Game/GameComponents";
 import { SpawnBullet } from "Game/Weapons";
 
 export function SpawnPlayer(data: Data, world: World): Id {
+    const ship = new PlayerShip();
+    CycleWeapon(ship, world);
     return Create(data, {
-        playerShip: new PlayerShip(),
+        playerShip: ship,
         collisionTargetClass: new CollisionClass("player"),
         hp: new Hp(Teams.PLAYER, 1),
         location: new Location({
@@ -23,6 +25,20 @@ export function SpawnPlayer(data: Data, world: World): Id {
         ]),
         renderBounds: new RenderBounds("#ff0", world.shipLayer)
     });
+}
+
+function CycleWeapon(ship: PlayerShip, world: World) {
+    const haveWeapons = world.availableWeapons.filter(weapon => weapon == true).length > 0;
+    if(haveWeapons) {
+        do {
+            ship.currentWeapon++;
+            if(ship.currentWeapon > world.availableWeapons.length) {
+                ship.currentWeapon = 0;
+            }
+        } while(!world.availableWeapons[ship.currentWeapon])
+    } else {
+        ship.currentWeapon == PlayerWeapons.NONE;
+    }
 }
 
 export function RespawnPlayer(data: Data, world: World, interval: number) {
@@ -70,6 +86,9 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
         }
 
         // PHASE: Firing
+        if(weaponCycle) {
+            CycleWeapon(ship, world);
+        }
         if(firing && ship.firingCooldown <= 0) {
             FireForwardGun(data, world, ship, location.X, location.Y);
         } else {
@@ -85,7 +104,10 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
             renderBounds.color = "#fff";
             hp.hp = Math.min(hp.hp, 1);
         }
+        world.debug.weapon = ship.currentWeapon;
     });
+
+    world.debug.weapons = world.availableWeapons;
 
     // edge-triggered
     world.playerInput.weaponCycle = false;
