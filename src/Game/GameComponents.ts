@@ -89,6 +89,7 @@ export class World {
 }
 
 export class Data extends EcsData {
+    boss: Store<Boss> = {};
     bullet: Store<Bullet> = {};
     hp: Store<Hp> = {};
     lifetime: Store<Lifetime> = {};
@@ -127,4 +128,11 @@ export class Lifetime {
     constructor(
         public time: number
     ) {};
+}
+
+export class Boss {
+    killedBy: PlayerWeapons = PlayerWeapons.NONE;
+    constructor(
+        public name: string
+    ) {}
 }

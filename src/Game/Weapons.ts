@@ -28,12 +28,15 @@ export function BulletCollide(data: Data, className: string, sourceId: Id, targe
     switch(className) {
         case "bullet>enemy":
             const [bullet] = Lookup(data, sourceId, "bullet");
-            const [hp] = Lookup(data, targetId, "hp");
+            const [hp, boss] = Lookup(data, targetId, "hp", "boss");
             if(bullet && hp && (bullet.team != hp.team)) {
                 hp.hp -= bullet.attack;
                 hp.receivedDamage += bullet.attack;
                 bullet.hit = true;
                 PlaySfx(HIT_SOUND);
+                if(boss) {
+                    boss.killedBy = bullet.weapon;
+                }
             }
     }
 }
