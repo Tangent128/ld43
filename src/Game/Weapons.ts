@@ -3,15 +3,15 @@ import { Id, Create, Join, Remove, Lookup } from "Ecs/Data";
 import { Polygon, Location, RenderBounds, CollisionClass } from "Ecs/Components";
 import { Data, World, Bullet, Teams, HIT_SOUND, PlayerWeapons } from "Game/GameComponents";
 
-export function SpawnBullet(data: Data, world: World, x: number, y: number, weapon: PlayerWeapons, angle = Math.PI/2, attack = 100): Id {
+export function SpawnBullet(data: Data, world: World, x: number, y: number, weapon: PlayerWeapons, angle = Math.PI/2, attack = 100, speed = 400, team: Teams = Teams.PLAYER): Id {
     return Create(data, {
-        bullet: new Bullet(Teams.PLAYER, weapon, attack),
+        bullet: new Bullet(team, weapon, attack),
         collisionSourceClass: new CollisionClass("bullet"),
         location: new Location({
             X: x,
             Y: y,
-            VX: 400 * Math.cos(angle),
-            VY: -400 * Math.sin(angle),
+            VX: speed * Math.cos(angle),
+            VY: -speed * Math.sin(angle),
             Angle: angle
         }),
         bounds: new Polygon([
@@ -26,6 +26,7 @@ export function SpawnBullet(data: Data, world: World, x: number, y: number, weap
 
 export function BulletCollide(data: Data, className: string, sourceId: Id, targetId: Id) {
     switch(className) {
+        case "bullet>player":
         case "bullet>enemy":
             const [bullet] = Lookup(data, sourceId, "bullet");
             const [hp, boss] = Lookup(data, targetId, "hp", "boss");
