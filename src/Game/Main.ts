@@ -57,11 +57,12 @@ export class Shooter {
          * Drawing Tick
          */
         dt => {
+            const {data, world: {phase, bgColor: [red, green, blue]}} = this;
+
             const drawSet = new DrawSet();
-            this.cx.fillStyle = "#333";
+            this.cx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
             this.cx.fillRect(0, 0, this.world.width, this.world.height);
 
-            const {data, world: {phase}} = this;
             RunRenderBounds(data, drawSet);
             RunRenderSprites(data, drawSet);
             this.world.drawDebug(drawSet, "#f00");

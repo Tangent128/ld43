@@ -87,7 +87,6 @@ export function SwooparangThink(data: Data, world: World, interval: number) {
                 let angleDelta = targetAngle - (location.Angle % (Math.PI*2));
                 if(angleDelta < -Math.PI) angleDelta += Math.PI * 2;
                 if(angleDelta > Math.PI) angleDelta -= Math.PI * 2;
-                world.debug.targetAngle = targetAngle;
 
                 if(Math.abs(angleDelta) < 0.1) {
                     location.VAngle = 0;

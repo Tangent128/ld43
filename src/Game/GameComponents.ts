@@ -35,6 +35,7 @@ export enum PlayerWeapons {
     SHOOTER = 1,
     BACK_FLARE = 2
 }
+export type RGB = [number, number, number];
 export class World {
     width = 500;
     height = 400;
@@ -66,6 +67,8 @@ export class World {
     shipLayer = new Layer(15);
     smokeLayer = new Layer(16);
     hudLayer = new Layer(20);
+
+    bgColor: RGB = [255, 255, 255];
 
     /**
      * Catch-all debug tool

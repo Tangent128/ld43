@@ -1,5 +1,5 @@
 import { Id, Join } from "Ecs/Data";
-import { Data, World, Teams, GamePhase } from "Game/GameComponents";
+import { Data, World, Teams, GamePhase, RGB } from "Game/GameComponents";
 
 type Spawner = (data: Data, world: World, x: number) => Id;
 
@@ -13,6 +13,8 @@ export class Level {
     wave = 0;
     cooldown = 0;
     waitOnClear = false;
+
+    bgColor: RGB = [0, 0, 0];
 
     addWave(pattern: Pattern, delay: number) {
         this.waves.push({
@@ -41,6 +43,19 @@ export class Level {
         } else if(fieldClear && world.phase == GamePhase.PLAYING) {
             world.phase = GamePhase.WON;
         }
+
+        world.bgColor = world.bgColor.map((channel, i) => {
+            const target = this.bgColor[i];
+            const delta = target - channel;
+            if(delta > 0) {
+                return Math.min(target, channel + 500 * interval);
+            } else if(delta < 0) {
+                return Math.max(target, channel - 500 * interval);
+            } else {
+                return channel;
+            }
+        }) as RGB;
+        world.debug.bg = {bg: world.bgColor, target: this.bgColor}
     }
 }
 

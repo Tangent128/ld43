@@ -1,8 +1,10 @@
 import { Level, EvenPattern, CenterPattern } from "./Level";
 import { SpawnStalacfite, SpawnStalacfiteDx } from "Game/Enemy/Stalacfite";
 import { SpawnSwooparang } from "Game/Enemy/Swooparang";
+import { RGB } from "Game/GameComponents";
 
 export class PlainLevel extends Level {
+    bgColor = [220, 154, 105] as RGB;
     constructor() {
         super();
         this.addWave(new CenterPattern(100, SpawnSwooparang), -1);
