@@ -40,7 +40,6 @@ scenery:
 - "welcome to level" sign
 
 priority:
-- lose weapon to boss
 - message system
 
 phase III?
