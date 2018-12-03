@@ -40,16 +40,14 @@ scenery:
 - "welcome to level" sign
 
 priority:
-- back weapon
-- enemy art pass
-- swoop enemy
+- level transition
 
 phase III?
-- level transition
 - all weapons
 - lose weapon to boss
 
 tbd:
+- enemy art pass
 - image pass
 - audio pass
 - all enemies
