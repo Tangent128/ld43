@@ -10,6 +10,7 @@ import { Data, World, GamePhase, SPLASH_SHEET } from "Game/GameComponents";
 import { ControlPlayer, PlayerCollide, RespawnPlayer } from "Game/Player";
 import { ReapBullets, BulletCollide } from "Game/Weapons";
 import { StalacfiteThink } from "Game/Enemy/Stalacfite";
+import { SwooparangThink } from "Game/Enemy/Swooparang";
 import { CaveLevel } from "Level/Cave";
 
 const PHYSICS_FPS = 40;
@@ -32,6 +33,7 @@ export class Shooter {
             // PHASE: Input/AI
             ControlPlayer(data, world, interval);
             StalacfiteThink(data, world, interval);
+            SwooparangThink(data, world, interval);
             world.level.tick(data, world, interval);
 
             // PHASE: Update

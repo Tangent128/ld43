@@ -8,6 +8,7 @@ import shootUrl from "Game/Shoot.ogg";
 import boomUrl from "Game/SmallBoom.ogg";
 import splashUrl from "Game/Splashscreens.png";
 import { Stalacfite } from "Game/Enemy/Stalacfite";
+import { Swooparang } from "Game/Enemy/Swooparang";
 import { Level } from "Level/Level";
 
 function loadImage(url: string) {
@@ -90,6 +91,7 @@ export class Data extends EcsData {
     lifetime: Store<Lifetime> = {};
     playerShip: Store<PlayerShip> = {};
     stalacfite: Store<Stalacfite> = {};
+    swooparang: Store<Swooparang> = {};
 }
 
 export class PlayerShip {
