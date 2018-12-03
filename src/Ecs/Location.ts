@@ -3,7 +3,7 @@ import { Join } from "Ecs/Data";
 
 export function TransformCx(cx: CanvasRenderingContext2D, location: Location, dt = 0) {
     cx.translate(location.X + location.VX * dt, location.Y + location.VY * dt);
-    cx.rotate(location.Angle + location.VAngle * dt);
+    cx.rotate(-location.Angle + location.VAngle * dt);
 }
 
 export function TfPolygon({points}: Polygon, {X, Y, Angle}: Location): Polygon {
