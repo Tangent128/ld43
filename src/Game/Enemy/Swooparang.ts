@@ -24,6 +24,7 @@ export function SpawnSwooparang(data: Data, world: World, x: number): Id {
         location: new Location({
             X: x,
             Y: -50,
+            Angle: -Math.PI/2,
             VY: (Math.random() + 0.5) * 100
         }),
         bounds: new Polygon([
@@ -54,7 +55,6 @@ export function SwooparangThink(data: Data, world: World, interval: number) {
 
     let count = 0;
     Join(data, "swooparang", "location", "hp").forEach(([id, swooparang, location, hp]) => {
-        world.debug.swooparang = {...swooparang, angle: location.Angle};
         count++;
 
         const aiCoolingDown = swooparang.aiCooldown > 0;
@@ -112,9 +112,8 @@ export function SwooparangThink(data: Data, world: World, interval: number) {
 
             if(!aiCoolingDown) {
                 swooparang.thinking = Thought.DWELLING;
-                swooparang.aiCooldown = 1;
+                swooparang.aiCooldown = 1 + Math.random();
             }
         }
     });
-    world.debug.swooparangs = count;
 }
