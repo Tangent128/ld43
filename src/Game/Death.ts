@@ -15,6 +15,14 @@ export function SelfDestructMinions(data: Data, world: World) {
     }
 }
 
+export function StripWeapon(data: Data, world: World) {
+    Join(data, "boss", "hp")
+        .filter(([id, boss, {hp}]) => hp <= 0)
+        .forEach(([id, boss]) => {
+            world.availableWeapons[boss.killedBy] = false;
+        });
+}
+
 export function CheckHp(data: Data, world: World) {
     Join(data, "hp").forEach(([id, hp]) => {
         if(hp.hp <= 0) {

@@ -6,7 +6,6 @@ import { SpawnBullet } from "Game/Weapons";
 
 export function SpawnPlayer(data: Data, world: World): Id {
     const ship = new PlayerShip();
-    CycleWeapon(ship, world);
     return Create(data, {
         playerShip: ship,
         collisionTargetClass: new CollisionClass("player"),
@@ -86,7 +85,7 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
         }
 
         // PHASE: Firing
-        if(weaponCycle) {
+        if(weaponCycle || world.availableWeapons[ship.currentWeapon] == false) {
             CycleWeapon(ship, world);
         }
         if(firing && ship.firingCooldown <= 0) {
@@ -112,8 +111,6 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
             hp.hp = Math.min(hp.hp, 1);
         }
     });
-
-    world.debug.weapons = world.availableWeapons;
 
     // edge-triggered
     world.playerInput.weaponCycle = false;
