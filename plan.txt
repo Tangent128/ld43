@@ -40,11 +40,11 @@ scenery:
 - "welcome to level" sign
 
 priority:
-- level transition
+- lose weapon to boss
+- message system
 
 phase III?
 - all weapons
-- lose weapon to boss
 
 tbd:
 - enemy art pass
