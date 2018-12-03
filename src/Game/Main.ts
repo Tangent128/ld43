@@ -31,28 +31,32 @@ export class Shooter {
         interval => {
             const {data, world} = this;
 
+            // PHASE: Spawn
+            RespawnPlayer(data, world, interval);
+            world.level.tick(data, world, interval);
+
             // PHASE: Input/AI
             ControlPlayer(data, world, interval);
             StalacfiteThink(data, world, interval);
             SwooparangThink(data, world, interval);
-            world.level.tick(data, world, interval);
 
             // PHASE: Update
             DumbMotion(data, interval);
 
-            // PHASE: React
+            // PHASE: Detect
             FindCollisions(data, 50, (className, source, target) => {
                 BulletCollide(data, className, source, target);
                 PlayerCollide(data, className, source, target);
             });
-            SmokeDamage(data, world);
 
-            // PHASE: reaping
+            // PHASE: React
+            SmokeDamage(data, world);
             SelfDestructMinions(data, world);
+
+            // PHASE: Reaping
             CheckHp(data, world);
             ReapBullets(data, world);
             CheckLifetime(data, world, interval);
-            RespawnPlayer(data, world, interval);
         },
         /**
          * Drawing Tick
