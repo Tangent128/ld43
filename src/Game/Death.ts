@@ -1,7 +1,19 @@
 import { PlaySfx } from "Applet/Audio";
 import { RenderBounds, Polygon, Location } from "Ecs/Components";
 import { Join, Remove, Lookup, Create, Id } from "Ecs/Data";
-import { Data, World, BOOM_SOUND, BIG_BOOM_SOUND, Lifetime } from "Game/GameComponents";
+import { Data, World, BOOM_SOUND, BIG_BOOM_SOUND, Lifetime, Teams } from "Game/GameComponents";
+
+export function SelfDestructMinions(data: Data, world: World) {
+    const bossKilled = Join(data, "boss", "hp")
+        .filter(([id, boss, {hp}]) => hp < 0)
+        .length > 0;
+
+    if(bossKilled) {
+        Join(data, "hp")
+        .filter(([id, hp]) => hp.team == Teams.ENEMY)
+        .forEach(([id, hp]) => hp.hp = 0);
+    }
+}
 
 export function CheckHp(data: Data, world: World) {
     Join(data, "hp").forEach(([id, hp]) => {

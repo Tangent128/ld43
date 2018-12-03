@@ -5,7 +5,7 @@ import { DrawSet } from "Applet/Render";
 import { FindCollisions } from "Ecs/Collision";
 import { DumbMotion } from "Ecs/Location";
 import { RunRenderBounds, RunRenderSprites } from "Ecs/Renderers";
-import { CheckHp, CheckLifetime, SmokeDamage } from "Game/Death";
+import { CheckHp, CheckLifetime, SmokeDamage, SelfDestructMinions } from "Game/Death";
 import { Data, World, GamePhase, SPLASH_SHEET } from "Game/GameComponents";
 import { ControlPlayer, PlayerCollide, RespawnPlayer } from "Game/Player";
 import { ReapBullets, BulletCollide } from "Game/Weapons";
@@ -48,6 +48,7 @@ export class Shooter {
             SmokeDamage(data, world);
 
             // PHASE: reaping
+            SelfDestructMinions(data, world);
             CheckHp(data, world);
             ReapBullets(data, world);
             CheckLifetime(data, world, interval);
