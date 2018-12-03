@@ -113,5 +113,4 @@ export function StalacfiteThink(data: Data, world: World, interval: number) {
             spawner.spawn(data, world);
         }
     });
-    debug["stalacfites"] = count;
 }

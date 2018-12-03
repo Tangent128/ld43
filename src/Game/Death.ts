@@ -38,7 +38,6 @@ export function CheckLifetime(data: Data, world: World, interval: number) {
         }
         particles++;
     });
-    world.debug.particles = particles;
 }
 
 export function SmokeDamage(data: Data, world: World) {

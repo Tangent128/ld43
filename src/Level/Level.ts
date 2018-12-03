@@ -37,7 +37,6 @@ export class Level {
         } else if(fieldClear && world.phase == GamePhase.PLAYING) {
             world.phase = GamePhase.WON;
         }
-        world.debug["phase"] = world.phase;
     }
 }
 

@@ -45,5 +45,4 @@ export function ReapBullets(data: Data, {width, height, debug}: World) {
             Remove(data, id);
         }
     });
-    debug["bullets"] = bulletCount;
 }
