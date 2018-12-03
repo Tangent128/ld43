@@ -18,7 +18,7 @@ const PHYSICS_FPS = 40;
 
 @Game("#Shooter")
 export class Shooter {
-    world = new World(new PlainLevel());
+    world = new World(new CaveLevel(new PlainLevel()));
     data = new Data();
 
     /**

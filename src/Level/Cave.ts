@@ -4,8 +4,8 @@ import { RGB } from "Game/GameComponents";
 
 export class CaveLevel extends Level {
     bgColor = [48, 48, 48] as RGB;
-    constructor() {
-        super();
+    constructor(nextLevel?: Level) {
+        super(nextLevel);
         this.addWave(new EvenPattern(40, SpawnStalacfite, SpawnStalacfite, SpawnStalacfite), 5);
         this.addWave(new EvenPattern(100, SpawnStalacfite, SpawnStalacfite), 2);
         this.addWave(new EvenPattern(40, SpawnStalacfite, SpawnStalacfite), 2);

@@ -16,6 +16,10 @@ export class Level {
 
     bgColor: RGB = [0, 0, 0];
 
+    constructor(
+        public nextLevel?: Level
+    ) {}
+
     addWave(pattern: Pattern, delay: number) {
         this.waves.push({
             pattern,
@@ -41,7 +45,11 @@ export class Level {
                 this.wave++;
             }
         } else if(fieldClear && world.phase == GamePhase.PLAYING) {
-            world.phase = GamePhase.WON;
+            if(this.nextLevel) {
+                world.level = this.nextLevel;
+            } else {
+                world.phase = GamePhase.WON;
+            }
         }
 
         world.bgColor = world.bgColor.map((channel, i) => {
