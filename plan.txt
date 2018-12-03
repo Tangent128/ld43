@@ -40,11 +40,9 @@ scenery:
 - "welcome to level" sign
 
 priority:
-- boss
-- swoop enemy
 - back weapon
-- weapon cycling
 - enemy art pass
+- swoop enemy
 
 phase III?
 - level transition
