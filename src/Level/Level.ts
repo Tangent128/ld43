@@ -63,7 +63,6 @@ export class Level {
                 return channel;
             }
         }) as RGB;
-        world.debug.bg = {bg: world.bgColor, target: this.bgColor}
     }
 }
 

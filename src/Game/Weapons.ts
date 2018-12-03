@@ -1,11 +1,11 @@
 import { PlaySfx } from "Applet/Audio";
 import { Id, Create, Join, Remove, Lookup } from "Ecs/Data";
 import { Polygon, Location, RenderBounds, CollisionClass } from "Ecs/Components";
-import { Data, World, Bullet, Teams, HIT_SOUND } from "Game/GameComponents";
+import { Data, World, Bullet, Teams, HIT_SOUND, PlayerWeapons } from "Game/GameComponents";
 
-export function SpawnBullet(data: Data, world: World, x: number, y: number, angle = Math.PI/2, attack = 100): Id {
+export function SpawnBullet(data: Data, world: World, x: number, y: number, weapon: PlayerWeapons, angle = Math.PI/2, attack = 100): Id {
     return Create(data, {
-        bullet: new Bullet(Teams.PLAYER, attack),
+        bullet: new Bullet(Teams.PLAYER, weapon, attack),
         collisionSourceClass: new CollisionClass("bullet"),
         location: new Location({
             X: x,

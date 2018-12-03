@@ -111,7 +111,8 @@ export class Bullet {
     hit = false;
     constructor(
         public team: Teams,
-        public attack = 100
+        public weapon: PlayerWeapons,
+        public attack: number
     ) {};
 }
 export class Hp {

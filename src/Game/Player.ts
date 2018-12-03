@@ -111,7 +111,6 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
             renderBounds.color = "#fff";
             hp.hp = Math.min(hp.hp, 1);
         }
-        world.debug.weapon = ship.currentWeapon;
     });
 
     world.debug.weapons = world.availableWeapons;
@@ -122,14 +121,14 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
 
 function FireForwardGun(data: Data, world: World, ship: PlayerShip, x: number, y: number) {
     ship.firingCooldown = 0.2;
-    SpawnBullet(data, world, x, y);
+    SpawnBullet(data, world, x, y, PlayerWeapons.SHOOTER);
     PlaySfx(SHOOT_SOUND);
 }
 function FireBackFlare(data: Data, world: World, ship: PlayerShip, x: number, y: number) {
     ship.firingCooldown = 0.4;
-    SpawnBullet(data, world, x, y, Math.PI * 1.4, 150);
-    SpawnBullet(data, world, x, y, Math.PI * 1.5, 150);
-    SpawnBullet(data, world, x, y, Math.PI * 1.6, 150);
+    SpawnBullet(data, world, x, y, PlayerWeapons.BACK_FLARE, Math.PI * 1.4, 150);
+    SpawnBullet(data, world, x, y, PlayerWeapons.BACK_FLARE, Math.PI * 1.5, 150);
+    SpawnBullet(data, world, x, y, PlayerWeapons.BACK_FLARE, Math.PI * 1.6, 150);
     PlaySfx(SHOOT_SOUND);
 }
 
