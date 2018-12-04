@@ -14,12 +14,13 @@ import { SwooparangThink } from "Game/Enemy/Swooparang";
 import { CaveLevel } from "Level/Cave";
 import { PlainLevel } from "Level/Plain";
 import { ArrangeMessages, ReapMessages, RenderMessages } from "./Message";
+import { TitleScreen } from "Level/Title";
 
 const PHYSICS_FPS = 40;
 
 @Game("#Shooter")
 export class Shooter {
-    world = new World(new CaveLevel(new PlainLevel()));
+    world = new World(new TitleScreen());
     data = new Data();
 
     /**
@@ -31,6 +32,16 @@ export class Shooter {
          */
         interval => {
             const {data, world} = this;
+
+            // PHASE: set/reset game
+            if(this.world.playerInput.startGame) {
+                if(this.world.phase == GamePhase.TITLE) {
+                    this.world.phase = GamePhase.PLAYING;
+                } else {
+                    this.reset();
+                }
+                this.world.playerInput.startGame = false;
+            }
 
             // PHASE: Spawn
             RespawnPlayer(data, world, interval);
@@ -88,7 +99,13 @@ export class Shooter {
 
     constructor(public canvas: HTMLCanvasElement, public cx: CanvasRenderingContext2D, public keys: KeyControl) {
         this.gameLoop.start();
-        this.keys.setHandler(this.world.playerInput);
         this.keys.focus();
+        this.reset();
+    }
+
+    reset() {
+        this.world = new World(new TitleScreen(new CaveLevel(new PlainLevel())));
+        this.data = new Data();
+        this.keys.setHandler(this.world.playerInput);
     }
 }

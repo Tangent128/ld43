@@ -1,5 +1,5 @@
 import { Id, Create, Join, Remove } from "Ecs/Data";
-import { Data, World, Message } from "./GameComponents";
+import { Data, World, Message, GamePhase } from "./GameComponents";
 import { Location } from "Ecs/Components";
 import { DrawSet } from "Applet/Render";
 import { TransformCx } from "Ecs/Location";
@@ -17,8 +17,8 @@ export function SpawnMessage(color: string, text: string) {
     }
 }
 
-const FONT_SIZE = 20;
-const ADVANCE = 24;
+const FONT_SIZE = 16;
+const ADVANCE = 20;
 export function ArrangeMessages(data: Data, world: World, interval: number) {
     const messages = Join(data, "message", "location");
     messages.sort(([{}, {timeout: timeoutA}, {}], [{}, {timeout: timeoutB}, {}]) => timeoutA - timeoutB);
@@ -40,7 +40,7 @@ export function ArrangeMessages(data: Data, world: World, interval: number) {
             location.X = world.width / 2;
             message.timeout -= interval;
             location.VX = 0;
-        } else {
+        } else if(world.phase == GamePhase.PLAYING) {
             location.VX = world.width;
         }
     });
@@ -54,7 +54,6 @@ export function ReapMessages(data: Data, {width, height, debug}: World) {
             Remove(data, id);
         }
     });
-    debug.messages = count;
 }
 
 export function RenderMessages(data: Data, drawSet: DrawSet) {

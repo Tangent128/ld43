@@ -5,6 +5,7 @@ export class PlayerControl implements KeyHandler {
     dy = 0;
     firing = false;
     weaponCycle = false;
+    startGame = false;
 
     press(key: KeyName) {
         switch(key) {
@@ -25,6 +26,9 @@ export class PlayerControl implements KeyHandler {
                 break;
             case "b":
                 this.weaponCycle = true;
+                break;
+            case "menu":
+                this.startGame = true;
                 break;
         }
     }

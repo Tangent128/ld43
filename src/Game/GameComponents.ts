@@ -47,7 +47,7 @@ export class World {
     /*
      * Core Game Status
      */
-    phase = GamePhase.PLAYING;
+    phase = GamePhase.TITLE;
     respawnCooldown = 0;
     lives = 3;
     availableWeapons = [false, true, true];

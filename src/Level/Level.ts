@@ -13,6 +13,7 @@ export class Level {
     wave = 0;
     cooldown = 0;
     waitOnClear = false;
+    isTitleScreen = false;
 
     bgColor: RGB = [0, 0, 0];
 
@@ -34,7 +35,7 @@ export class Level {
 
         if(this.cooldown > 0) {
             this.cooldown = Math.max(this.cooldown - interval, 0);
-        } else if(this.wave < this.waves.length && world.phase == GamePhase.PLAYING) {
+        } else if(this.wave < this.waves.length && (world.phase == GamePhase.PLAYING || this.isTitleScreen)) {
             if(fieldClear || !this.waitOnClear) {
                 const wave = this.waves[this.wave];
 
