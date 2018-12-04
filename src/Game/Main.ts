@@ -88,7 +88,8 @@ export class Shooter {
             RunRenderBounds(data, drawSet);
             RunRenderSprites(data, drawSet);
             RenderMessages(data, drawSet);
-            this.world.drawDebug(drawSet, "#f00");
+            //this.world.drawDebug(drawSet, "#f00");
+            this.world.drawHud(drawSet);
 
             drawSet.draw(this.cx, dt);
             if(phase == GamePhase.WON) {

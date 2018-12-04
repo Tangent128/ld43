@@ -11,6 +11,7 @@ import splashUrl from "Game/Splashscreens.png";
 import { Stalacfite } from "Game/Enemy/Stalacfite";
 import { Swooparang } from "Game/Enemy/Swooparang";
 import { Level } from "Level/Level";
+import { WeaponName } from "./Weapons";
 
 function loadImage(url: string) {
     return Object.assign(new Image(), {src: url});
@@ -88,6 +89,23 @@ export class World {
                 cx.fillText(`${label}: ${JSON.stringify(this.debug[label])}`, 0, y, this.width);
                 y += 14;
             }
+        }));
+    }
+    drawHud(drawSet: DrawSet) {
+        drawSet.queue(this.hudLayer.toRender((cx, dt) => {
+            cx.font = "20px monospace";
+            cx.textAlign = "left";
+            cx.textBaseline = "middle";
+
+            cx.fillStyle = "#000";
+            cx.fillText(`Lives: ${this.lives}`, 1, this.height - 38 + 1, this.width);
+            cx.fillStyle = "#0ff";
+            cx.fillText(`Lives: ${this.lives}`, 0, this.height - 38, this.width);
+
+            cx.fillStyle = "#000";
+            cx.fillText(`Weapon: ${this.debug.weapon}`, 1, this.height - 18 + 1, this.width);
+            cx.fillStyle = "#0ff";
+            cx.fillText(`Weapon: ${this.debug.weapon}`, 0, this.height - 18, this.width);
         }));
     }
 }

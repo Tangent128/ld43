@@ -31,7 +31,7 @@ export function WeaponName(weapon: PlayerWeapons) {
         case PlayerWeapons.BACK_FLARE:
             return "flare bombs";
         default:
-            return "weapon";
+            return "defenseless";
     }
 }
 
