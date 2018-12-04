@@ -52,6 +52,7 @@ export class World {
     respawnCooldown = 0;
     lives = 5;
     availableWeapons = [false, true, true];
+    score = 0;
 
     constructor(
         /**
@@ -93,19 +94,27 @@ export class World {
     }
     drawHud(drawSet: DrawSet) {
         drawSet.queue(this.hudLayer.toRender((cx, dt) => {
-            cx.font = "20px monospace";
+            cx.font = "16px monospace";
             cx.textAlign = "left";
             cx.textBaseline = "middle";
 
+            const lives = `Lives: ${this.lives}`;
             cx.fillStyle = "#000";
-            cx.fillText(`Lives: ${this.lives}`, 1, this.height - 38 + 1, this.width);
+            cx.fillText(lives, 1, this.height - 18 + 1, this.width/4);
             cx.fillStyle = "#0ff";
-            cx.fillText(`Lives: ${this.lives}`, 0, this.height - 38, this.width);
+            cx.fillText(lives, 0, this.height - 18, this.width/4);
 
+            const score = `Score: ${this.score}`;
             cx.fillStyle = "#000";
-            cx.fillText(`Weapon: ${this.debug.weapon}`, 1, this.height - 18 + 1, this.width);
+            cx.fillText(score, this.width/3 + 1, this.height - 18 + 1, this.width/4);
             cx.fillStyle = "#0ff";
-            cx.fillText(`Weapon: ${this.debug.weapon}`, 0, this.height - 18, this.width);
+            cx.fillText(score, this.width/3, this.height - 18, this.width/4);
+
+            const weapon = `Weapon: ${this.debug.weapon}`;
+            cx.fillStyle = "#000";
+            cx.fillText(weapon, this.width*2/3 + 1, this.height - 18 + 1, this.width/4);
+            cx.fillStyle = "#0ff";
+            cx.fillText(weapon, this.width*2/3, this.height - 18, this.width/4);
         }));
     }
 }

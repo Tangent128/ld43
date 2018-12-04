@@ -59,7 +59,7 @@ export class Shooter {
 
             // PHASE: Detect
             FindCollisions(data, 50, (className, source, target) => {
-                BulletCollide(data, className, source, target);
+                BulletCollide(world, data, className, source, target);
                 PlayerCollide(data, className, source, target);
                 CollapseCollide(data, className, source, target);
             });

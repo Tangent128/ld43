@@ -35,7 +35,7 @@ export function WeaponName(weapon: PlayerWeapons) {
     }
 }
 
-export function BulletCollide(data: Data, className: string, sourceId: Id, targetId: Id) {
+export function BulletCollide(world: World, data: Data, className: string, sourceId: Id, targetId: Id) {
     switch(className) {
         case "bullet>player":
         case "bullet>stalacfite":
@@ -45,6 +45,7 @@ export function BulletCollide(data: Data, className: string, sourceId: Id, targe
             if(bullet && hp && (bullet.team != hp.team)) {
                 hp.hp -= bullet.attack;
                 hp.receivedDamage += bullet.attack;
+                world.score += bullet.attack;
                 bullet.hit = true;
                 PlaySfx(HIT_SOUND);
                 if(boss) {
