@@ -11,7 +11,7 @@ interface Wave {
 export class Level {
     waves: Wave[] = [];
     wave = 0;
-    cooldown = 0;
+    cooldown = 2;
     waitOnClear = false;
     isTitleScreen = false;
 

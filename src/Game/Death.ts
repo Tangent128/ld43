@@ -2,6 +2,8 @@ import { PlaySfx } from "Applet/Audio";
 import { RenderBounds, Polygon, Location } from "Ecs/Components";
 import { Join, Remove, Lookup, Create, Id } from "Ecs/Data";
 import { Data, World, BOOM_SOUND, BIG_BOOM_SOUND, Lifetime, Teams } from "Game/GameComponents";
+import { SpawnMessage } from "./Message";
+import { WeaponName } from "./Weapons";
 
 export function SelfDestructMinions(data: Data, world: World) {
     const bossKilled = Join(data, "boss", "hp")
@@ -20,6 +22,9 @@ export function StripWeapon(data: Data, world: World) {
         .filter(([id, boss, {hp}]) => hp <= 0)
         .forEach(([id, boss]) => {
             world.availableWeapons[boss.killedBy] = false;
+            SpawnMessage("#0a4", `You defeated the ${boss.name}!`)(data, world, 0);
+            SpawnMessage("#f40", `But you had to sacrifice your`)(data, world, 0.01);
+            SpawnMessage("#f40", `${WeaponName(boss.killedBy)} to do it...`)(data, world, 0.02);
         });
 }
 

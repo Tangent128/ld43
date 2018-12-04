@@ -5,14 +5,14 @@ import { DrawSet } from "Applet/Render";
 import { TransformCx } from "Ecs/Location";
 
 export function SpawnMessage(color: string, text: string) {
-    return function(data: Data, world: World, x: number): Id {
+    return function(data: Data, world: World, x: number, timeoutDelta = 0): Id {
         return Create(data, {
             location: new Location({
                 X: -world.width,
                 Y: world.height/2,
                 VX: world.width
             }),
-            message: new Message(world.cloudLayer, color, text)
+            message: new Message(world.cloudLayer, color, text, 3 + timeoutDelta)
         });
     }
 }

@@ -7,6 +7,7 @@ import { SpawnMessage } from "Game/Message";
 export class TitleScreen extends Level {
     bgColor = [50, 100, 128] as RGB;
     isTitleScreen = true;
+    cooldown = 0;
     constructor(nextLevel?: Level) {
         super(nextLevel);
         this.addWave(new CenterPattern(40, SpawnMessage("#fff", "Controls:")), 0.2);

@@ -24,6 +24,17 @@ export function SpawnBullet(data: Data, world: World, x: number, y: number, weap
     });
 }
 
+export function WeaponName(weapon: PlayerWeapons) {
+    switch(weapon) {
+        case PlayerWeapons.SHOOTER:
+            return "forward cannon";
+        case PlayerWeapons.BACK_FLARE:
+            return "flare bombs";
+        default:
+            return "weapon";
+    }
+}
+
 export function BulletCollide(data: Data, className: string, sourceId: Id, targetId: Id) {
     switch(className) {
         case "bullet>player":
