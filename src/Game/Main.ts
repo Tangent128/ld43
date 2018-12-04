@@ -90,9 +90,9 @@ export class Shooter {
 
             drawSet.draw(this.cx, dt);
             if(phase == GamePhase.WON) {
-                SPLASH_SHEET.render(this.cx, 0);
+                //SPLASH_SHEET.render(this.cx, 0);
             } else if(phase == GamePhase.LOST) {
-                SPLASH_SHEET.render(this.cx, 1);
+                //SPLASH_SHEET.render(this.cx, 1);
             }
 
         });

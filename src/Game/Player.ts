@@ -2,7 +2,8 @@ import { PlaySfx } from "Applet/Audio";
 import { Id, Create, Join, Lookup } from "Ecs/Data";
 import { Polygon, Location, RenderBounds, CollisionClass } from "Ecs/Components";
 import { Data, World, PlayerShip, Hp, Teams, GamePhase, SHOOT_SOUND, PlayerWeapons } from "Game/GameComponents";
-import { SpawnBullet } from "Game/Weapons";
+import { SpawnBullet, WeaponName } from "Game/Weapons";
+import { SpawnMessage } from "./Message";
 
 export function SpawnPlayer(data: Data, world: World): Id {
     const ship = new PlayerShip();
@@ -49,8 +50,11 @@ export function RespawnPlayer(data: Data, world: World, interval: number) {
         if(world.lives > 0) {
             SpawnPlayer(data, world);
             world.lives--;
-        } else {
+        } else if(world.phase == GamePhase.PLAYING) {
             world.phase = GamePhase.LOST;
+            SpawnMessage("#f00", `G A M E`)(data, world, 0);
+            SpawnMessage("#f00", `O V E R`)(data, world, 0.01);
+            SpawnMessage("#888", `Press C or Enter to restart`)(data, world, 0.02);
         }
     } else {
         world.respawnCooldown = 2;

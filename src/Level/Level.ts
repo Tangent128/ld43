@@ -1,5 +1,6 @@
 import { Id, Join } from "Ecs/Data";
 import { Data, World, Teams, GamePhase, RGB } from "Game/GameComponents";
+import { SpawnMessage } from "Game/Message";
 
 type Spawner = (data: Data, world: World, x: number) => Id;
 
@@ -50,6 +51,8 @@ export class Level {
                 world.level = this.nextLevel;
             } else {
                 world.phase = GamePhase.WON;
+                SpawnMessage("#0f0", `Victory!`)(data, world, 3);
+                SpawnMessage("#8aa", `Press C or Enter to restart`)(data, world, 3.02);
             }
         }
 
