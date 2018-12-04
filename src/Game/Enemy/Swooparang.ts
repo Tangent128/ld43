@@ -1,8 +1,10 @@
-import { Id, Create, Join, Remove } from "Ecs/Data";
+import { Id, Create, Join, Remove, Lookup } from "Ecs/Data";
 import { CollisionClass, Polygon, Location, RenderBounds } from "Ecs/Components";
 import { Data, World, Hp, Teams, Boss, PlayerWeapons, ENEMY_SHOOT_SOUND } from "Game/GameComponents";
 import { SpawnBullet } from "Game/Weapons";
 import { PlaySfx } from "Applet/Audio";
+import { EvenPattern } from "Level/Level";
+import { SpawnStalacfite } from "./Stalacfite";
 
 enum Thought {
     SPAWNING,
@@ -13,13 +15,14 @@ export class Swooparang {
     thinking = Thought.SPAWNING;
     aiCooldown = 1;
     constructor(
-        public bossMode = false
+        public bossMode = false,
+        public collapseMode = false
     ) {}
 }
 
-export function SpawnSwooparang(data: Data, world: World, x: number): Id {
+export function SpawnSwooparang(data: Data, world: World, x: number, collapse = false): Id {
     return Create(data, {
-        swooparang: new Swooparang(),
+        swooparang: new Swooparang(false, collapse),
         collisionSourceClass: new CollisionClass("swooparang"),
         collisionTargetClass: new CollisionClass("swooparang"),
         hp: new Hp(Teams.ENEMY, 150),
@@ -43,8 +46,12 @@ export function SpawnSwooparang(data: Data, world: World, x: number): Id {
             0, -21,
             -12, -21
         ]),
-        renderBounds: new RenderBounds("#8fa", world.shipLayer)
+        renderBounds: new RenderBounds(collapse ? "#80f" : "#8fa", world.shipLayer)
     });
+}
+
+export function SpawnSwooparangCollapse(data: Data, world: World, x: number): Id {
+    return SpawnSwooparang(data, world, x, true);
 }
 
 export function SpawnSwooparangDx(data: Data, world: World, x: number): Id {
@@ -149,7 +156,27 @@ export function SwooparangThink(data: Data, world: World, interval: number) {
                 if(!swooparang.bossMode) {
                     swooparang.aiCooldown = 1 + Math.random();
                 }
+                if(swooparang.collapseMode) {
+                    // spawn some attacks
+                    const spawner = new EvenPattern(40, SpawnStalacfite, SpawnStalacfite, SpawnStalacfite);
+                    spawner.spawn(data, world);
+                }
             }
         }
     });
+}
+
+export function CollapseCollide(data: Data, className: string, sourceId: Id, targetId: Id) {
+    switch(className) {
+        case "stalacfite>swooparang":
+            const [stalacfite, stalacfiteHp] = Lookup(data, sourceId, "stalacfite", "hp");
+            const [swooparang, swooparangHp] = Lookup(data, targetId, "swooparang", "hp");
+            if(stalacfite && stalacfiteHp) {
+                stalacfiteHp.hp = -1;
+            }
+            if(swooparang && swooparangHp) {
+                swooparangHp.hp -= 50;
+                swooparangHp.receivedDamage += 200;
+            }
+    }
 }

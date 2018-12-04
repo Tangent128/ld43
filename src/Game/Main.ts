@@ -10,11 +10,12 @@ import { Data, World, GamePhase, SPLASH_SHEET } from "Game/GameComponents";
 import { ControlPlayer, PlayerCollide, RespawnPlayer } from "Game/Player";
 import { ReapBullets, BulletCollide } from "Game/Weapons";
 import { StalacfiteThink } from "Game/Enemy/Stalacfite";
-import { SwooparangThink } from "Game/Enemy/Swooparang";
+import { SwooparangThink, CollapseCollide } from "Game/Enemy/Swooparang";
 import { CaveLevel } from "Level/Cave";
 import { PlainLevel } from "Level/Plain";
 import { ArrangeMessages, ReapMessages, RenderMessages } from "./Message";
 import { TitleScreen } from "Level/Title";
+import { CollapseLevel } from "Level/Collapse";
 
 const PHYSICS_FPS = 40;
 
@@ -60,6 +61,7 @@ export class Shooter {
             FindCollisions(data, 50, (className, source, target) => {
                 BulletCollide(data, className, source, target);
                 PlayerCollide(data, className, source, target);
+                CollapseCollide(data, className, source, target);
             });
 
             // PHASE: React
@@ -104,7 +106,10 @@ export class Shooter {
     }
 
     reset() {
-        this.world = new World(new TitleScreen(new CaveLevel(new PlainLevel())));
+        this.world = new World(new TitleScreen(new CaveLevel(new PlainLevel(new CollapseLevel()))));
+        //this.world = new World(new CaveLevel());
+        //this.world = new World(new PlainLevel());
+        //this.world = new World(new CollapseLevel());
         this.data = new Data();
         this.keys.setHandler(this.world.playerInput);
     }
