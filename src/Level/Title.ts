@@ -10,12 +10,13 @@ export class TitleScreen extends Level {
     cooldown = 0;
     constructor(nextLevel?: Level) {
         super(nextLevel);
-        this.addWave(new CenterPattern(40, SpawnMessage("#fff", "Controls:")), 0.2);
-        this.addWave(new CenterPattern(40, SpawnMessage("#ccc", "Z or Space: Fire Weapon")), 0.2);
-        this.addWave(new CenterPattern(40, SpawnMessage("#ccc", "X or Shift: Change Weapon")), 0.2);
-        this.addWave(new CenterPattern(40, SpawnMessage("#cec", "C or Enter: Start/Restart Game")), 0.2);
+        this.addWave(new CenterPattern(40, SpawnMessage("#f80", "BURNED OUT")), 0.1);
+        this.addWave(new CenterPattern(40, SpawnMessage("#fff", "Controls:")), 0.1);
+        this.addWave(new CenterPattern(40, SpawnMessage("#ccc", "Z or Space: Fire Weapon")), 0.1);
+        this.addWave(new CenterPattern(40, SpawnMessage("#ccc", "X or Shift: Change Weapon")), 0.1);
+        this.addWave(new CenterPattern(40, SpawnMessage("#cec", "C or Enter: Start/Restart Game")), 0.1);
         this.addWave(new CenterPattern(40, SpawnMessage("#ccc", "")), 0);
         this.addWave(new CenterPattern(40, SpawnMessage("#caa", "Defeating a boss sacrifices")), 0);
-        this.addWave(new CenterPattern(40, SpawnMessage("#caa", "the weapon you beat it with")), 0.2);
+        this.addWave(new CenterPattern(40, SpawnMessage("#caa", "the weapon you beat it with")), 0.1);
     }
 }
