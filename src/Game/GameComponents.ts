@@ -49,7 +49,7 @@ export class World {
      */
     phase = GamePhase.TITLE;
     respawnCooldown = 0;
-    lives = 3;
+    lives = 5;
     availableWeapons = [false, true, true];
 
     constructor(
