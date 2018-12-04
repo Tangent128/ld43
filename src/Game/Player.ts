@@ -36,7 +36,7 @@ function CycleWeapon(ship: PlayerShip, world: World) {
             }
         } while(!world.availableWeapons[ship.currentWeapon])
     } else {
-        ship.currentWeapon == PlayerWeapons.NONE;
+        ship.currentWeapon = PlayerWeapons.NONE;
     }
 }
 
@@ -87,6 +87,7 @@ export function ControlPlayer(data: Data, world: World, interval: number) {
         // PHASE: Firing
         if(weaponCycle || world.availableWeapons[ship.currentWeapon] == false) {
             CycleWeapon(ship, world);
+            world.debug.weapon = WeaponName(ship.currentWeapon);
         }
         if(firing && ship.firingCooldown <= 0) {
             switch(ship.currentWeapon) {
