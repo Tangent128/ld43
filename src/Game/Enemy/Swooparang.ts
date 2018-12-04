@@ -20,8 +20,8 @@ export class Swooparang {
 export function SpawnSwooparang(data: Data, world: World, x: number): Id {
     return Create(data, {
         swooparang: new Swooparang(),
-        collisionSourceClass: new CollisionClass("enemy"),
-        collisionTargetClass: new CollisionClass("enemy"),
+        collisionSourceClass: new CollisionClass("swooparang"),
+        collisionTargetClass: new CollisionClass("swooparang"),
         hp: new Hp(Teams.ENEMY, 150),
         location: new Location({
             X: x,
@@ -51,8 +51,8 @@ export function SpawnSwooparangDx(data: Data, world: World, x: number): Id {
     return Create(data, {
         swooparang: new Swooparang(true),
         boss: new Boss("Heavy Swooparang"),
-        collisionSourceClass: new CollisionClass("enemy"),
-        collisionTargetClass: new CollisionClass("enemy"),
+        collisionSourceClass: new CollisionClass("swooparang"),
+        collisionTargetClass: new CollisionClass("swooparang"),
         hp: new Hp(Teams.ENEMY, 500),
         location: new Location({
             X: x,

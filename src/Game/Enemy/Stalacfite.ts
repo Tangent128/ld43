@@ -20,8 +20,8 @@ export class Stalacfite {
 export function SpawnStalacfite(data: Data, world: World, x: number): Id {
     return Create(data, {
         stalacfite: new Stalacfite(),
-        collisionSourceClass: new CollisionClass("enemy"),
-        collisionTargetClass: new CollisionClass("enemy"),
+        collisionSourceClass: new CollisionClass("stalacfite"),
+        collisionTargetClass: new CollisionClass("stalacfite"),
         hp: new Hp(Teams.ENEMY, 300),
         location: new Location({
             X: x,
@@ -41,8 +41,8 @@ export function SpawnStalacfiteDx(data: Data, world: World, x: number): Id {
     return Create(data, {
         stalacfite: new Stalacfite(true),
         boss: new Boss("Stalacfite DX"),
-        collisionSourceClass: new CollisionClass("enemy"),
-        collisionTargetClass: new CollisionClass("enemy"),
+        collisionSourceClass: new CollisionClass("stalacfite"),
+        collisionTargetClass: new CollisionClass("stalacfite"),
         hp: new Hp(Teams.ENEMY, 2000),
         location: new Location({
             X: x,

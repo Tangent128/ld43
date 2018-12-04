@@ -38,7 +38,8 @@ export function WeaponName(weapon: PlayerWeapons) {
 export function BulletCollide(data: Data, className: string, sourceId: Id, targetId: Id) {
     switch(className) {
         case "bullet>player":
-        case "bullet>enemy":
+        case "bullet>stalacfite":
+        case "bullet>swooparang":
             const [bullet] = Lookup(data, sourceId, "bullet");
             const [hp, boss] = Lookup(data, targetId, "hp", "boss");
             if(bullet && hp && (bullet.team != hp.team)) {

@@ -136,7 +136,8 @@ function FireBackFlare(data: Data, world: World, ship: PlayerShip, x: number, y:
 
 export function PlayerCollide(data: Data, className: string, sourceId: Id, targetId: Id) {
     switch(className) {
-        case "enemy>player":
+        case "stalacfite>player":
+        case "swooparang>player":
             const [ship, hp] = Lookup(data, targetId, "playerShip", "hp");
             if(ship && hp) {
                 hp.hp -= 100;
