@@ -1,5 +1,6 @@
 import { Id, Create, Join, Remove, Lookup } from "Ecs/Data";
 import { CollisionClass, Polygon, Location, RenderBounds } from "Ecs/Components";
+import { Approach } from "Ecs/Location";
 import { Data, World, Hp, Teams, Boss, PlayerWeapons, ENEMY_SHOOT_SOUND } from "Game/GameComponents";
 import { SpawnBullet } from "Game/Weapons";
 import { PlaySfx } from "Applet/Audio";
@@ -111,16 +112,8 @@ export function SwooparangThink(data: Data, world: World, interval: number) {
         if(swooparang.thinking == Thought.DWELLING) {
 
             // brakes
-            if(Math.abs(location.VX) > BRAKING * interval) {
-                location.VX -= Math.sign(location.VX) * BRAKING * interval;
-            } else {
-                location.VX = 0;
-            }
-            if(Math.abs(location.VY) > BRAKING * interval) {
-                location.VY -= Math.sign(location.VY) * BRAKING * interval;
-            } else {
-                location.VY = 0;
-            }
+            location.VX = Approach(location.VX, 0, BRAKING * interval);
+            location.VY = Approach(location.VY, 0, BRAKING * interval);
 
             if(target) {
                 const targetAngle = Math.atan2(location.Y - target.Y, target.X - location.X);
