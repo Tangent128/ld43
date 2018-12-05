@@ -1,6 +1,5 @@
 import { Id, Create, Join, Remove, Lookup } from "Ecs/Data";
-import { CollisionClass, Polygon, Location, RenderBounds } from "Ecs/Components";
-import { Approach } from "Ecs/Location";
+import { Approach, CollisionClass, Polygon, Location, RenderBounds } from "Ecs/Components";
 import { Data, World, Hp, Teams, Boss, PlayerWeapons, ENEMY_SHOOT_SOUND } from "Game/GameComponents";
 import { SpawnBullet } from "Game/Weapons";
 import { PlaySfx } from "Applet/Audio";

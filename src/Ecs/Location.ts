@@ -26,12 +26,3 @@ export function DumbMotion(data: Data, interval: number) {
         location.Angle += location.VAngle * interval;
     });
 }
-
-export function Approach(source: number, target: number, speed: number): number {
-    const delta = target - source;
-    if(Math.abs(delta) <= speed) {
-        return target;
-    } else {
-        return source + Math.sign(delta) * speed;
-    }
-}
