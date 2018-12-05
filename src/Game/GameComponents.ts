@@ -77,21 +77,8 @@ export class World {
     /**
      * Catch-all debug tool
      */
-    debug: Record<string, any> = {
-    };
-    drawDebug(drawSet: DrawSet, color: string) {
-        drawSet.queue(this.hudLayer.toRender((cx, dt) => {
-            cx.font = "12px monospace";
-            cx.fillStyle = color;
-            let y = 12;
-            for(const label in this.debug) {
-                cx.textAlign = "left";
-                cx.textBaseline = "middle";
-                cx.fillText(`${label}: ${JSON.stringify(this.debug[label])}`, 0, y, this.width);
-                y += 14;
-            }
-        }));
-    }
+    debug: Record<string, any> = {};
+
     drawHud(drawSet: DrawSet) {
         drawSet.queue(this.hudLayer.toRender((cx, dt) => {
             cx.font = "16px monospace";

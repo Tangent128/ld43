@@ -4,7 +4,7 @@ import { Loop } from "Applet/Loop";
 import { DrawSet } from "Applet/Render";
 import { FindCollisions } from "Ecs/Collision";
 import { DumbMotion } from "Ecs/Location";
-import { RunRenderBounds, RunRenderSprites } from "Ecs/Renderers";
+import { RunRenderBounds, RunRenderSprites, DrawDebug } from "Ecs/Renderers";
 import { CheckHp, CheckLifetime, SmokeDamage, SelfDestructMinions, StripWeapon } from "Game/Death";
 import { Data, World, GamePhase, SPLASH_SHEET } from "Game/GameComponents";
 import { ControlPlayer, PlayerCollide, RespawnPlayer } from "Game/Player";
@@ -79,7 +79,7 @@ export class Shooter {
          * Drawing Tick
          */
         dt => {
-            const {data, world: {phase, bgColor: [red, green, blue]}} = this;
+            const {data, world: {phase, bgColor: [red, green, blue], debug, hudLayer, width}} = this;
 
             const drawSet = new DrawSet();
             this.cx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
@@ -88,7 +88,7 @@ export class Shooter {
             RunRenderBounds(data, drawSet);
             RunRenderSprites(data, drawSet);
             RenderMessages(data, drawSet);
-            //this.world.drawDebug(drawSet, "#f00");
+            //DrawDebug(debug, drawSet, hudLayer, width, "#f00");
             this.world.drawHud(drawSet);
 
             drawSet.draw(this.cx, dt);
