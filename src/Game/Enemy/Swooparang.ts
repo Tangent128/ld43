@@ -99,9 +99,7 @@ export function SwooparangThink(data: Data, world: World, interval: number) {
 
         const aiCoolingDown = swooparang.aiCooldown > 0;
 
-        if(aiCoolingDown) {
-            swooparang.aiCooldown = Math.max(swooparang.aiCooldown - interval, 0);
-        }
+        swooparang.aiCooldown = Approach(swooparang.aiCooldown, 0, interval);
 
         // wait a little after spawn before activating
         if(swooparang.thinking == Thought.SPAWNING && !aiCoolingDown) {

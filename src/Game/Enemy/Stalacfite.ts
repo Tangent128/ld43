@@ -1,5 +1,5 @@
 import { Id, Create, Join, Remove } from "Ecs/Data";
-import { CollisionClass, Polygon, Location, RenderBounds } from "Ecs/Components";
+import { CollisionClass, Polygon, Location, RenderBounds, Approach } from "Ecs/Components";
 import { Data, World, Hp, Teams, Boss } from "Game/GameComponents";
 import { EvenPattern } from "Level/Level";
 
@@ -66,10 +66,7 @@ export function StalacfiteThink(data: Data, world: World, interval: number) {
         count++;
 
         const aiCoolingDown = stalacfite.aiCooldown > 0;
-
-        if(aiCoolingDown) {
-            stalacfite.aiCooldown = Math.max(stalacfite.aiCooldown - interval, 0);
-        }
+        stalacfite.aiCooldown = Approach(stalacfite.aiCooldown, 0, interval);
 
         if(stalacfite.thinking == Thought.SPAWNING && !aiCoolingDown) {
             stalacfite.thinking = Thought.DWELLING;
