@@ -1,6 +1,6 @@
-import { Bind } from "Applet/Init";
-import { KeyControl, KeyHandler, KeyName } from "Applet/Keyboard";
-import { Loop } from "Applet/Loop";
+import { Bind } from "./Init";
+import { KeyControl, KeyHandler, KeyName } from "./Keyboard";
+import { Loop } from "./Loop";
 
 @Bind("#KeyTest")
 export class Test implements KeyHandler {

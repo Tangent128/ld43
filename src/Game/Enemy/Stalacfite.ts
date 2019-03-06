@@ -1,7 +1,7 @@
-import { Id, Create, Join, Remove } from "Ecs/Data";
-import { CollisionClass, Polygon, Location, RenderBounds, Approach } from "Ecs/Components";
-import { Data, World, Hp, Teams, Boss } from "Game/GameComponents";
-import { EvenPattern } from "Level/Level";
+import { Id, Create, Join, Remove } from "../../Ecs/Data";
+import { CollisionClass, Polygon, Location, RenderBounds, Approach } from "../../Ecs/Components";
+import { Data, World, Hp, Teams, Boss } from "../GameComponents";
+import { EvenPattern } from "../../Level/Level";
 
 enum Thought {
     SPAWNING,

@@ -1,6 +1,6 @@
-import { Id, Join } from "Ecs/Data";
-import { Data, World, Teams, GamePhase, RGB } from "Game/GameComponents";
-import { SpawnMessage } from "Game/Message";
+import { Id, Join } from "../Ecs/Data";
+import { Data, World, Teams, GamePhase, RGB } from "../Game/GameComponents";
+import { SpawnMessage } from "../Game/Message";
 
 type Spawner = (data: Data, world: World, x: number) => Id;
 

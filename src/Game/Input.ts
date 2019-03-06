@@ -1,4 +1,4 @@
-import { KeyHandler, KeyName } from "Applet/Keyboard";
+import { KeyHandler, KeyName } from "../Applet/Keyboard";
 
 export class PlayerControl implements KeyHandler {
     dx = 0;

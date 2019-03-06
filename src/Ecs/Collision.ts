@@ -1,6 +1,6 @@
-import { Data, Location, Polygon, CollisionClass } from "Ecs/Components";
-import { Id, Join } from "Ecs/Data";
-import { TfPolygon } from "Ecs/Location";
+import { Data, Location, Polygon, CollisionClass } from "./Components";
+import { Id, Join } from "./Data";
+import { TfPolygon } from "./Location";
 
 interface Candidate {
     id: Id;

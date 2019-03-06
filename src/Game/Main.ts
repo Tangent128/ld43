@@ -1,21 +1,21 @@
-import { Game } from "Applet/Init";
-import { KeyControl } from "Applet/Keyboard";
-import { Loop } from "Applet/Loop";
-import { DrawSet } from "Applet/Render";
-import { FindCollisions } from "Ecs/Collision";
-import { DumbMotion } from "Ecs/Location";
-import { RunRenderBounds, RunRenderSprites, DrawDebug } from "Ecs/Renderers";
-import { CheckHp, CheckLifetime, SmokeDamage, SelfDestructMinions, StripWeapon } from "Game/Death";
-import { Data, World, GamePhase, SPLASH_SHEET } from "Game/GameComponents";
-import { ControlPlayer, PlayerCollide, RespawnPlayer } from "Game/Player";
-import { ReapBullets, BulletCollide } from "Game/Weapons";
-import { StalacfiteThink } from "Game/Enemy/Stalacfite";
-import { SwooparangThink, CollapseCollide } from "Game/Enemy/Swooparang";
-import { CaveLevel } from "Level/Cave";
-import { PlainLevel } from "Level/Plain";
+import { Game } from "../Applet/Init";
+import { KeyControl } from "../Applet/Keyboard";
+import { Loop } from "../Applet/Loop";
+import { DrawSet } from "../Applet/Render";
+import { FindCollisions } from "../Ecs/Collision";
+import { DumbMotion } from "../Ecs/Location";
+import { RunRenderBounds, RunRenderSprites, DrawDebug } from "../Ecs/Renderers";
+import { CheckHp, CheckLifetime, SmokeDamage, SelfDestructMinions, StripWeapon } from "./Death";
+import { Data, World, GamePhase, SPLASH_SHEET } from "./GameComponents";
+import { ControlPlayer, PlayerCollide, RespawnPlayer } from "./Player";
+import { ReapBullets, BulletCollide } from "./Weapons";
+import { StalacfiteThink } from "./Enemy/Stalacfite";
+import { SwooparangThink, CollapseCollide } from "./Enemy/Swooparang";
+import { CaveLevel } from "../Level/Cave";
+import { PlainLevel } from "../Level/Plain";
 import { ArrangeMessages, ReapMessages, RenderMessages } from "./Message";
-import { TitleScreen } from "Level/Title";
-import { CollapseLevel } from "Level/Collapse";
+import { TitleScreen } from "../Level/Title";
+import { CollapseLevel } from "../Level/Collapse";
 
 const PHYSICS_FPS = 40;
 

@@ -1,5 +1,5 @@
-import { Data, Location, Polygon } from "Ecs/Components";
-import { Join } from "Ecs/Data";
+import { Data, Location, Polygon } from "./Components";
+import { Join } from "./Data";
 
 export function TransformCx(cx: CanvasRenderingContext2D, location: Location, dt = 0) {
     cx.translate(location.X + location.VX * dt, location.Y + location.VY * dt);

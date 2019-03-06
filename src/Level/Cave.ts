@@ -1,7 +1,7 @@
 import { Level, EvenPattern, CenterPattern } from "./Level";
-import { SpawnStalacfite, SpawnStalacfiteDx } from "Game/Enemy/Stalacfite";
-import { RGB } from "Game/GameComponents";
-import { SpawnMessage } from "Game/Message";
+import { SpawnStalacfite, SpawnStalacfiteDx } from "../Game/Enemy/Stalacfite";
+import { RGB } from "../Game/GameComponents";
+import { SpawnMessage } from "../Game/Message";
 
 export class CaveLevel extends Level {
     bgColor = [48, 48, 64] as RGB;

@@ -1,7 +1,7 @@
-import { PlaySfx } from "Applet/Audio";
-import { RenderBounds, Polygon, Location } from "Ecs/Components";
-import { Join, Remove, Lookup, Create, Id } from "Ecs/Data";
-import { Data, World, BOOM_SOUND, BIG_BOOM_SOUND, Lifetime, Teams } from "Game/GameComponents";
+import { PlaySfx } from "../Applet/Audio";
+import { RenderBounds, Polygon, Location } from "../Ecs/Components";
+import { Join, Remove, Lookup, Create, Id } from "../Ecs/Data";
+import { Data, World, BOOM_SOUND, BIG_BOOM_SOUND, Lifetime, Teams } from "./GameComponents";
 import { SpawnMessage } from "./Message";
 import { WeaponName } from "./Weapons";
 

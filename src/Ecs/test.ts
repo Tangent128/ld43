@@ -1,12 +1,12 @@
-import { Bind, Game } from "Applet/Init";
-import { KeyControl } from "Applet/Keyboard";
-import { Loop } from "Applet/Loop";
-import { Layer, DrawSet } from "Applet/Render";
-import { Data, Location, Polygon, RenderBounds, CollisionClass } from "Ecs/Components";
-import { FindCollisions } from "Ecs/Collision";
-import { Component, Join, Liveness, Remove, Create, Lookup } from "Ecs/Data";
-import { DumbMotion } from "Ecs/Location";
-import { RunRenderBounds } from "Ecs/Renderers";
+import { Bind, Game } from "../Applet/Init";
+import { KeyControl } from "../Applet/Keyboard";
+import { Loop } from "../Applet/Loop";
+import { Layer, DrawSet } from "../Applet/Render";
+import { Data, Location, Polygon, RenderBounds, CollisionClass } from "./Components";
+import { FindCollisions } from "./Collision";
+import { Component, Join, Liveness, Remove, Create, Lookup } from "./Data";
+import { DumbMotion } from "./Location";
+import { RunRenderBounds } from "./Renderers";
 
 interface Apple extends Component {}
 interface Banana extends Component {

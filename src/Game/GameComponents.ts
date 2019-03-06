@@ -1,16 +1,16 @@
-import { Layer, DrawSet, SpriteSheet } from "Applet/Render";
-import { Store } from "Ecs/Data";
-import { Data as EcsData } from "Ecs/Components";
-import bigBoomUrl from "Game/BigBoom.ogg";
-import enemyShootUrl from "Game/EnemyShoot.ogg";
-import hitUrl from "Game/Hit.ogg";
-import { PlayerControl } from "Game/Input";
-import shootUrl from "Game/Shoot.ogg";
-import boomUrl from "Game/SmallBoom.ogg";
-import splashUrl from "Game/Splashscreens.png";
-import { Stalacfite } from "Game/Enemy/Stalacfite";
-import { Swooparang } from "Game/Enemy/Swooparang";
-import { Level } from "Level/Level";
+import { Layer, DrawSet, SpriteSheet } from "../Applet/Render";
+import { Store } from "../Ecs/Data";
+import { Data as EcsData } from "../Ecs/Components";
+import bigBoomUrl from "./BigBoom.ogg";
+import enemyShootUrl from "./EnemyShoot.ogg";
+import hitUrl from "./Hit.ogg";
+import { PlayerControl } from "./Input";
+import shootUrl from "./Shoot.ogg";
+import boomUrl from "./SmallBoom.ogg";
+import splashUrl from "./Splashscreens.png";
+import { Stalacfite } from "./Enemy/Stalacfite";
+import { Swooparang } from "./Enemy/Swooparang";
+import { Level } from "../Level/Level";
 import { WeaponName } from "./Weapons";
 
 function loadImage(url: string) {

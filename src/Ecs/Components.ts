@@ -1,6 +1,6 @@
 
-import { Data as CoreData, Store } from "Ecs/Data";
-import { Layer, SpriteSheet } from "Applet/Render";
+import { Data as CoreData, Store } from "./Data";
+import { Layer, SpriteSheet } from "../Applet/Render";
 
 export class Box {
     constructor(

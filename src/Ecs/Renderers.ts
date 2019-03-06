@@ -1,7 +1,7 @@
-import { Data } from "Ecs/Components";
-import { Join } from "Ecs/Data";
-import { TransformCx } from "Ecs/Location";
-import { DrawSet, Layer } from "Applet/Render";
+import { Data } from "./Components";
+import { Join } from "./Data";
+import { TransformCx } from "./Location";
+import { DrawSet, Layer } from "../Applet/Render";
 
 export function RunRenderBounds(data: Data, drawSet: DrawSet) {
     drawSet.queue(...Join(data, "renderBounds", "location", "bounds").map(

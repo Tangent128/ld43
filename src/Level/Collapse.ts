@@ -1,8 +1,8 @@
 import { Level, EvenPattern, CenterPattern } from "./Level";
-import { SpawnStalacfite, SpawnStalacfiteDx } from "Game/Enemy/Stalacfite";
-import { SpawnSwooparang, SpawnSwooparangDx, SpawnSwooparangCollapse } from "Game/Enemy/Swooparang";
-import { RGB } from "Game/GameComponents";
-import { SpawnMessage } from "Game/Message";
+import { SpawnStalacfite, SpawnStalacfiteDx } from "../Game/Enemy/Stalacfite";
+import { SpawnSwooparang, SpawnSwooparangDx, SpawnSwooparangCollapse } from "../Game/Enemy/Swooparang";
+import { RGB } from "../Game/GameComponents";
+import { SpawnMessage } from "../Game/Message";
 
 export class CollapseLevel extends Level {
     bgColor = [0, 0, 0] as RGB;

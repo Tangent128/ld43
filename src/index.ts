@@ -1,2 +1,2 @@
 import "index.scss";
-import "Game/Main";
+import "./Game/Main";

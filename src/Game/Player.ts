@@ -1,8 +1,8 @@
-import { PlaySfx } from "Applet/Audio";
-import { Id, Create, Join, Lookup } from "Ecs/Data";
-import { Polygon, Location, RenderBounds, CollisionClass } from "Ecs/Components";
-import { Data, World, PlayerShip, Hp, Teams, GamePhase, SHOOT_SOUND, PlayerWeapons } from "Game/GameComponents";
-import { SpawnBullet, WeaponName } from "Game/Weapons";
+import { PlaySfx } from "../Applet/Audio";
+import { Id, Create, Join, Lookup } from "../Ecs/Data";
+import { Polygon, Location, RenderBounds, CollisionClass } from "../Ecs/Components";
+import { Data, World, PlayerShip, Hp, Teams, GamePhase, SHOOT_SOUND, PlayerWeapons } from "./GameComponents";
+import { SpawnBullet, WeaponName } from "./Weapons";
 import { SpawnMessage } from "./Message";
 
 export function SpawnPlayer(data: Data, world: World): Id {

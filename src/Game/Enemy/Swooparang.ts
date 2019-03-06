@@ -1,9 +1,9 @@
-import { Id, Create, Join, Remove, Lookup } from "Ecs/Data";
-import { Approach, CollisionClass, Polygon, Location, RenderBounds } from "Ecs/Components";
-import { Data, World, Hp, Teams, Boss, PlayerWeapons, ENEMY_SHOOT_SOUND } from "Game/GameComponents";
-import { SpawnBullet } from "Game/Weapons";
-import { PlaySfx } from "Applet/Audio";
-import { EvenPattern } from "Level/Level";
+import { Id, Create, Join, Remove, Lookup } from "../../Ecs/Data";
+import { Approach, CollisionClass, Polygon, Location, RenderBounds } from "../../Ecs/Components";
+import { Data, World, Hp, Teams, Boss, PlayerWeapons, ENEMY_SHOOT_SOUND } from "../GameComponents";
+import { SpawnBullet } from "../Weapons";
+import { PlaySfx } from "../../Applet/Audio";
+import { EvenPattern } from "../../Level/Level";
 import { SpawnStalacfite } from "./Stalacfite";
 
 enum Thought {

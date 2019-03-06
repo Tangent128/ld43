@@ -1,8 +1,8 @@
-import { Id, Create, Join, Remove } from "Ecs/Data";
+import { Id, Create, Join, Remove } from "../Ecs/Data";
 import { Data, World, Message, GamePhase } from "./GameComponents";
-import { Location } from "Ecs/Components";
-import { DrawSet } from "Applet/Render";
-import { TransformCx } from "Ecs/Location";
+import { Location } from "../Ecs/Components";
+import { DrawSet } from "../Applet/Render";
+import { TransformCx } from "../Ecs/Location";
 
 export function SpawnMessage(color: string, text: string) {
     return function(data: Data, world: World, x: number, timeoutDelta = 0): Id {

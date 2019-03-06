@@ -1,8 +1,8 @@
 import { Level, EvenPattern, CenterPattern } from "./Level";
-import { SpawnStalacfite, SpawnStalacfiteDx } from "Game/Enemy/Stalacfite";
-import { SpawnSwooparang, SpawnSwooparangDx } from "Game/Enemy/Swooparang";
-import { RGB } from "Game/GameComponents";
-import { SpawnMessage } from "Game/Message";
+import { SpawnStalacfite, SpawnStalacfiteDx } from "../Game/Enemy/Stalacfite";
+import { SpawnSwooparang, SpawnSwooparangDx } from "../Game/Enemy/Swooparang";
+import { RGB } from "../Game/GameComponents";
+import { SpawnMessage } from "../Game/Message";
 
 export class TitleScreen extends Level {
     bgColor = [50, 100, 128] as RGB;
